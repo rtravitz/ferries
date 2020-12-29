@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { MapContainer, Marker, TileLayer } from 'react-leaflet'
 import axios from 'axios'
 import { delayedIcon, stoppedIcon, goodIcon } from './Marker'
-import InfoPane from './InfoPane'
+import VesselPane from './vesselPane/VesselPane'
 import Vessel from './Vessel'
 
 function App() {
@@ -37,7 +37,6 @@ function App() {
             if (v.isInService()) {
               icon = v.isDelayed() ? delayedIcon : goodIcon
             }
-            console.log(v)
             return (
               <Marker 
                 key={v.id} 
@@ -48,7 +47,7 @@ function App() {
           })
         }
       </MapContainer>
-      { selectedVessel && <InfoPane vessel={selectedVessel} /> }
+      { selectedVessel && <VesselPane vessel={selectedVessel} /> }
     </section>
   );
 }

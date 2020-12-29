@@ -23,6 +23,14 @@ class Vessel {
   isDelayed() {
     return this.departDelayed === 'Y'
   }
+
+  isStopped() {
+    return this.headingText === 'Stopped'
+  }
+
+  hasNextDeparture() {
+    return this.nextDeparture.trim() !== ''
+  }
 }
 
 export default Vessel

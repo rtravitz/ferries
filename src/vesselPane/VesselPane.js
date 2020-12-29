@@ -1,7 +1,22 @@
-import compass from './assets/compass.svg'
-import speedometer from './assets/speedometer.svg'
+import Underway from './Underway'
+import OutOfService from './OutOfService'
+import Docked from './Docked'
 
-function InfoPanel({ vessel }) {
+import compass from '../assets/compass.svg'
+import speedometer from '../assets/speedometer.svg'
+
+function VesselPane({ vessel }) {
+  let leftBlock
+  if (vessel.isInService()) {
+    if (vessel.isStopped()) {
+      leftBlock = <Docked vessel={vessel} />
+    } else {
+      leftBlock = <Underway vessel={vessel} />
+    }
+  } else {
+    leftBlock = <OutOfService vessel={vessel} />
+  }
+
   return (
     <section className="fixed bottom-0 z-50 w-full">
       <div className="bg-ferry bg-center bg-contain bg-no-repeat h-20 flex flew-row justify-center items-center">
@@ -9,11 +24,7 @@ function InfoPanel({ vessel }) {
       </div>
       <div className="flex">
         <div className="w-1/2 p-2 flex flex-col items-center text-center bg-gray-transparent-200">
-          <h3 className="text-xl font-light">{vessel.lastDock}</h3>
-          <h5 className="font-semibold text-2xl">{vessel.leftDock}</h5>
-          <div className="arrow-down my-2"></div>
-          <h3 className="text-xl font-light">{vessel.nextDock}</h3>
-          <h5 className="font-semibold text-2xl">{vessel.eta}</h5>
+          { leftBlock }
         </div>
         <div className="w-1/2 p-2 flex flex-col items-center justify-between bg-gray-transparent-300">
           <div>
@@ -36,4 +47,4 @@ function InfoPanel({ vessel }) {
   )
 }
 
-export default InfoPanel
+export default VesselPane
