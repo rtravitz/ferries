@@ -4,15 +4,16 @@ import axios from 'axios'
 import { delayedIcon, stoppedIcon, goodIcon } from './Marker'
 import VesselPane from './vesselPane/VesselPane'
 import Vessel from './Vessel'
+import FixedControls from './FixedControls'
 
 function App() {
   const [vessels, setVessels] = useState([])
   const [selectedVessel, setSelectedVessel] = useState(null)
   useEffect(() => {
     axios.get('http://localhost:5000/ferries')
-      .then(res => { 
+      .then(res => {
         const vessels = res.data.vessellist.map(v => new Vessel(v))
-        setVessels(vessels) 
+        setVessels(vessels)
       })
       .catch(err => { console.log(err) })
   }, [])
@@ -26,7 +27,8 @@ function App() {
   return (
     <section>
       <MapContainer
-        center={[47.6038321, -122.3300624]} 
+        zoomControl={false}
+        center={[47.6038321, -122.3300624]}
         zoom={13}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -38,16 +40,17 @@ function App() {
               icon = v.isDelayed() ? delayedIcon : goodIcon
             }
             return (
-              <Marker 
-                key={v.id} 
+              <Marker
+                key={v.id}
                 icon={icon}
-                position={[v.lat, v.lon]} 
+                position={[v.lat, v.lon]}
                 eventHandlers={{ click: setVessel(v) }} />
             )
           })
         }
       </MapContainer>
-      { selectedVessel && <VesselPane vessel={selectedVessel} /> }
+      <FixedControls />
+      { selectedVessel && <VesselPane vessel={selectedVessel} />}
     </section>
   );
 }
