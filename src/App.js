@@ -2,26 +2,41 @@ import React, { useState, useEffect } from 'react'
 import { MapContainer, Marker, TileLayer } from 'react-leaflet'
 import axios from 'axios'
 import { delayedIcon, stoppedIcon, goodIcon } from './Marker'
-import VesselPane from './vesselPane/VesselPane'
+import BottomPane from './BottomPane'
 import Vessel from './Vessel'
+import VesselPane from './VesselPane'
 import FixedControls from './FixedControls'
+import InfoPane from './InfoPane'
 
 function App() {
   const [vessels, setVessels] = useState([])
-  const [selectedVessel, setSelectedVessel] = useState(null)
-  useEffect(() => {
+  const [activePane, setActivePane] = useState(null)
+
+  const refreshVessels = () => {
     axios.get('http://localhost:5000/ferries')
       .then(res => {
         const vessels = res.data.vessellist.map(v => new Vessel(v))
         setVessels(vessels)
       })
       .catch(err => { console.log(err) })
-  }, [])
+  }
+
+  useEffect(refreshVessels, [])
 
   const setVessel = (vessel) => {
     return () => {
-      setSelectedVessel(vessel)
+      setActivePane({
+        component: <VesselPane vessel={vessel} />,
+        header: vessel.name
+      })
     }
+  }
+
+  const setInfo = () => {
+    setActivePane({
+      component: <InfoPane />,
+      header: 'Info'
+    })
   }
 
   return (
@@ -49,8 +64,11 @@ function App() {
           })
         }
       </MapContainer>
-      <FixedControls />
-      { selectedVessel && <VesselPane vessel={selectedVessel} />}
+      <FixedControls refreshVessels={refreshVessels} setInfo={setInfo} />
+      { 
+        activePane && 
+        <BottomPane toRender={activePane.component} header={activePane.header} />
+      }
     </section>
   );
 }
