@@ -8,12 +8,14 @@ import VesselPane from './VesselPane'
 import FixedControls from './FixedControls'
 import InfoPane from './InfoPane'
 
+const BACKEND = process.env.REACT_APP_BACKEND
+
 function App() {
   const [vessels, setVessels] = useState([])
   const [activePane, setActivePane] = useState(null)
 
   const refreshVessels = () => {
-    axios.get('http://localhost:5000/ferries')
+    axios.get(BACKEND)
       .then(res => {
         const vessels = res.data.vessellist.map(v => new Vessel(v))
         setVessels(vessels)
