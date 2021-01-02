@@ -43,8 +43,8 @@ function App() {
     <section>
       <MapContainer
         zoomControl={false}
-        center={[47.6038321, -122.3300624]}
-        zoom={13}>
+        center={[47.965330, -122.659685]}
+        zoom={9}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />

@@ -1,10 +1,10 @@
 import L from 'leaflet'
-import delayed from './assets/ferry-delayed.svg'
-import stopped from './assets/ferry-stopped.svg'
-import good from './assets/ferry-good.svg'
+import delayed from './assets/ferry-token-delayed.svg'
+import stopped from './assets/ferry-token-stopped.svg'
+import good from './assets/ferry-token-good.svg'
 
-const HEIGHT = 45
-const WIDTH = 45
+const HEIGHT = 30
+const WIDTH = 90
 
 export const delayedIcon = new L.Icon({
   iconUrl: delayed,
