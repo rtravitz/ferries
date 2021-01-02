@@ -1,4 +1,4 @@
-import axios from 'axios'
+const axios = require('axios')
 
 exports.handler = () => {
   axios.get('https://www.wsdot.com/Ferries/VesselWatch/Vessels.ashx')
