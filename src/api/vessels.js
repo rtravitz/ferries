@@ -5,7 +5,7 @@ exports.handler = async () => {
     const res = await axios.get('https://www.wsdot.com/Ferries/VesselWatch/Vessels.ashx')
     return {
       statusCode: 200,
-      body: res.data,
+      body: JSON.stringify(res.data),
     }
   } catch (err) {
     return {
