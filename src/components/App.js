@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { MapContainer, Marker, TileLayer } from 'react-leaflet'
 import axios from 'axios'
-import { makeIcon } from './Marker'
+import { makeIcon } from '../mapIcon'
 import BottomPane from './BottomPane'
 import Vessel from '../models/Vessel'
 import VesselPane from './VesselPane'
@@ -72,6 +72,7 @@ export default function App() {
                 key={v.id}
                 icon={icon}
                 position={[v.lat, v.lon]}
+                zIndexOffset={isSelected ? 1000 : 1}
                 eventHandlers={{ click: setVessel(v) }} />
             )
           })
