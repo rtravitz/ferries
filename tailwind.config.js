@@ -14,10 +14,13 @@ module.exports = {
           'transparent-300': 'rgba(209, 213, 219, 0.9)',
         }
       },
-    },
+      animation: {
+        'spin-once': 'spin 1s',
+      },
+    },  
   },
   variants: {
-    extend: {},
+    backgroundColor: ['responsive', 'hover', 'focus', 'active'],
   },
-  plugins: [],
+  plugins: []
 }

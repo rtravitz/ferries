@@ -78,7 +78,9 @@ export default function App() {
           })
         }
       </MapContainer>
-      <FixedControls refreshVessels={refreshVessels} setInfo={setInfo} />
+      <FixedControls 
+        refreshVessels={refreshVessels} 
+        setInfo={setInfo} />
       {
         activePane &&
         <BottomPane
