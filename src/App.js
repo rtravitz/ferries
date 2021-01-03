@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { MapContainer, Marker, TileLayer } from 'react-leaflet'
 import axios from 'axios'
-import { delayedIcon, stoppedIcon, goodIcon } from './Marker'
+import { delayedIcon, outOfServiceIcon, goodIcon } from './Marker'
 import BottomPane from './BottomPane'
 import Vessel from './Vessel'
 import VesselPane from './VesselPane'
@@ -26,10 +26,16 @@ function App() {
   useEffect(refreshVessels, [])
 
   const setVessel = (vessel) => {
+    let headerColor = 'bg-ferry-red'
+    if (vessel.isInService()) {
+      headerColor= vessel.isDelayed() ? 'bg-ferry-yellow' : 'bg-ferry-green'
+    }
+
     return () => {
       setActivePane({
         component: <VesselPane vessel={vessel} />,
-        header: vessel.name
+        header: vessel.name,
+        headerColor,
       })
     }
   }
@@ -52,7 +58,7 @@ function App() {
           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />
         {
           vessels.map(v => {
-            let icon = stoppedIcon
+            let icon = outOfServiceIcon
             if (v.isInService()) {
               icon = v.isDelayed() ? delayedIcon : goodIcon
             }
@@ -69,7 +75,10 @@ function App() {
       <FixedControls refreshVessels={refreshVessels} setInfo={setInfo} />
       { 
         activePane && 
-        <BottomPane toRender={activePane.component} header={activePane.header} />
+        <BottomPane 
+          toRender={activePane.component} 
+          header={activePane.header} 
+          headerColor={activePane.headerColor} />
       }
     </section>
   );

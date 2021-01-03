@@ -1,4 +1,8 @@
 class Vessel {
+  static GREEN = 'bg-ferry-green'
+  static RED = 'bg-ferry-red'
+  static YELLOW = 'bg-ferry-yellow'
+
   constructor(v) {
     this.id = v.vesselID
     this.name = v.name
