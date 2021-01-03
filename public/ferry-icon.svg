@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>ferry icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="ferry-tracker" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="olympic-ferry" transform="translate(-1387.000000, -248.000000)">
+            <g id="ferry-icon" transform="translate(1387.000000, 248.000000)">
+                <circle id="Oval" fill="#047857" cx="60" cy="60" r="60"></circle>
+                <path d="M67,46.9094077 L67,38 L84.8745645,38 L84.8745645,46.9094077 L88.3797909,46.9094077 L88.3797909,59.9094077 L105,59.9094077 L91.3739383,82.4878049 L28.689003,82.4878049 L15,59.9094077 L31.6202091,59.9094077 L31.6202091,46.9094077 L35,46.9094077 L35,38 L52.8745645,38 L52.8745645,46.9094077 L67,46.9094077 Z" id="Combined-Shape" fill="#E5E7EB"></path>
+            </g>
+        </g>
+    </g>
+</svg>
