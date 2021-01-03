@@ -28,7 +28,7 @@ function App() {
   const setVessel = (vessel) => {
     let headerColor = 'bg-ferry-red'
     if (vessel.isInService()) {
-      headerColor= vessel.isDelayed() ? 'bg-ferry-yellow' : 'bg-ferry-green'
+      headerColor = vessel.isDelayed() ? 'bg-ferry-yellow' : 'bg-ferry-green'
     }
 
     return () => {
@@ -41,10 +41,14 @@ function App() {
   }
 
   const setInfo = () => {
-    setActivePane({
-      component: <InfoPane />,
-      header: 'Info'
-    })
+    if (activePane && activePane.component.type.name === 'InfoPane') {
+      setActivePane(null)
+    } else {
+      setActivePane({
+        component: <InfoPane />,
+        header: 'Info'
+      })
+    }
   }
 
   return (
@@ -73,11 +77,11 @@ function App() {
         }
       </MapContainer>
       <FixedControls refreshVessels={refreshVessels} setInfo={setInfo} />
-      { 
-        activePane && 
-        <BottomPane 
-          toRender={activePane.component} 
-          header={activePane.header} 
+      {
+        activePane &&
+        <BottomPane
+          toRender={activePane.component}
+          header={activePane.header}
           headerColor={activePane.headerColor} />
       }
     </section>
