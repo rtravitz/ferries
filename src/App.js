@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { MapContainer, Marker, TileLayer } from 'react-leaflet'
 import axios from 'axios'
-import { delayedIcon, outOfServiceIcon, goodIcon } from './Marker'
+import { makeIcon } from './Marker'
 import BottomPane from './BottomPane'
 import Vessel from './Vessel'
 import VesselPane from './VesselPane'
@@ -12,6 +12,7 @@ const BACKEND = process.env.REACT_APP_BACKEND
 
 function App() {
   const [vessels, setVessels] = useState([])
+  const [activeVesselID, setActiveVesselID] = useState(null)
   const [activePane, setActivePane] = useState(null)
 
   const refreshVessels = () => {
@@ -37,6 +38,7 @@ function App() {
         header: vessel.name,
         headerColor,
       })
+      setActiveVesselID(vessel.id)
     }
   }
 
@@ -62,10 +64,9 @@ function App() {
           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />
         {
           vessels.map(v => {
-            let icon = outOfServiceIcon
-            if (v.isInService()) {
-              icon = v.isDelayed() ? delayedIcon : goodIcon
-            }
+            const isSelected = activeVesselID === v.id
+            const icon = makeIcon(v.status(), isSelected)
+
             return (
               <Marker
                 key={v.id}

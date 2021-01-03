@@ -1,25 +1,29 @@
 import L from 'leaflet'
+
+import { OUTOFSERVICE, DELAYED } from './Vessel'
 import delayed from './assets/ferry-token-delayed.svg'
 import outOfService from './assets/ferry-token-out-of-service.svg'
 import good from './assets/ferry-token-good.svg'
 
-const HEIGHT = 30
-const WIDTH = 90
+const DEFAULT_H = 30
+const DEFAULT_W = 30
 
-export const delayedIcon = new L.Icon({
-  iconUrl: delayed,
-  iconRetinaUrl: delayed,
-  iconSize: new L.Point(HEIGHT, WIDTH),
-})
+export function makeIcon(status, selected) {
+  let icon = good
+  if (status === OUTOFSERVICE) {
+    icon = outOfService
+  } else if (status === DELAYED) {
+    icon = delayed
+  }
 
-export const outOfServiceIcon = new L.Icon({
-  iconUrl: outOfService,
-  iconRetinaUrl: outOfService,
-  iconSize: new L.Point(HEIGHT, WIDTH),
-})
+  const classes = selected ? 'bg-blue-500 rounded-full shadow-md transition-height duration-500' : ''
+  const width = selected ? 40 : DEFAULT_W
+  const height = selected ? 40 : DEFAULT_H
 
-export const goodIcon = new L.Icon({
-  iconUrl: good,
-  iconRetinaUrl: good,
-  iconSize: new L.Point(HEIGHT, WIDTH),
-})
+  return new L.Icon({
+    className: classes,
+    iconUrl: icon,
+    iconRetinaUrl: icon,
+    iconSize: new L.Point(width, height),
+  })
+}

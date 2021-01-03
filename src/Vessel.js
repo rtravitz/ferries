@@ -1,8 +1,8 @@
-class Vessel {
-  static GREEN = 'bg-ferry-green'
-  static RED = 'bg-ferry-red'
-  static YELLOW = 'bg-ferry-yellow'
+export const GOOD = 'GOOD'
+export const DELAYED = 'DELAYED'
+export const OUTOFSERVICE = 'OUTOFSERVICE'
 
+class Vessel {
   constructor(v) {
     this.id = v.vesselID
     this.name = v.name
@@ -34,6 +34,14 @@ class Vessel {
 
   hasNextDeparture() {
     return this.nextDeparture.trim() !== ''
+  }
+
+  status() {
+    if (this.isInService()) {
+      return this.isDelayed() ? DELAYED : GOOD
+    }
+
+    return OUTOFSERVICE
   }
 }
 
