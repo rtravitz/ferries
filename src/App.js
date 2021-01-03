@@ -81,7 +81,7 @@ function App() {
           headerColor={activePane.headerColor} />
       }
     </section>
-  );
+  )
 }
 
-export default App;
+export default App
