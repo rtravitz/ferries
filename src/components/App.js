@@ -43,12 +43,15 @@ export default function App() {
   }
 
   const setInfo = () => {
-    if (activePane && activePane.component.type.name === 'InfoPane') {
+    const INFO = 'Info'
+
+    if (activePane && activePane.header === INFO) {
       setActivePane(null)
     } else {
+      setActiveVesselID(null)
       setActivePane({
         component: <InfoPane />,
-        header: 'Info'
+        header: INFO
       })
     }
   }
