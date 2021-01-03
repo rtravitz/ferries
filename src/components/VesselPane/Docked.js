@@ -1,4 +1,6 @@
-function Docked({ vessel }) {
+import React from 'react'
+
+export default function Docked({ vessel }) {
   let nextDeparture = null
   if (vessel.hasNextDeparture()) {
     nextDeparture = <p className="font-semibold">Scheduled departure at {vessel.nextDeparture}</p>
@@ -19,5 +21,3 @@ function Docked({ vessel }) {
     </>
   )
 }
-
-export default Docked

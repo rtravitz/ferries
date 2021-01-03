@@ -1,6 +1,6 @@
 import React from 'react'
 
-function InfoPane() {
+export default function InfoPane() {
   return (
     <div className="bg-gray-transparent-200 text-lg p-4">
       <p>Ferry Tracker uses the API that backs 
@@ -17,5 +17,3 @@ function InfoPane() {
     </div>
   )
 }
-
-export default InfoPane

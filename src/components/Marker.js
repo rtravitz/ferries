@@ -1,9 +1,8 @@
 import L from 'leaflet'
-
-import { OUTOFSERVICE, DELAYED } from './Vessel'
-import delayed from './assets/ferry-token-delayed.svg'
-import outOfService from './assets/ferry-token-out-of-service.svg'
-import good from './assets/ferry-token-good.svg'
+import { OUTOFSERVICE, DELAYED } from '../models/Vessel'
+import delayed from '../assets/ferry-token-delayed.svg'
+import outOfService from '../assets/ferry-token-out-of-service.svg'
+import good from '../assets/ferry-token-good.svg'
 
 const DEFAULT_H = 30
 const DEFAULT_W = 30

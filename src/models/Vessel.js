@@ -2,7 +2,7 @@ export const GOOD = 'GOOD'
 export const DELAYED = 'DELAYED'
 export const OUTOFSERVICE = 'OUTOFSERVICE'
 
-class Vessel {
+export default class Vessel {
   constructor(v) {
     this.id = v.vesselID
     this.name = v.name
@@ -44,5 +44,3 @@ class Vessel {
     return OUTOFSERVICE
   }
 }
-
-export default Vessel

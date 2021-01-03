@@ -1,4 +1,6 @@
-function Underway({ vessel }) {
+import React from 'react'
+
+export default function Underway({ vessel }) {
   return (
     <>
       <h3 className="text-xl font-light">{vessel.lastDock}</h3>
@@ -9,5 +11,3 @@ function Underway({ vessel }) {
     </>
   )
 }
-
-export default Underway

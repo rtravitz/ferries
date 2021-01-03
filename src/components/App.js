@@ -3,14 +3,14 @@ import { MapContainer, Marker, TileLayer } from 'react-leaflet'
 import axios from 'axios'
 import { makeIcon } from './Marker'
 import BottomPane from './BottomPane'
-import Vessel from './Vessel'
+import Vessel from '../models/Vessel'
 import VesselPane from './VesselPane'
 import FixedControls from './FixedControls'
 import InfoPane from './InfoPane'
 
 const BACKEND = process.env.REACT_APP_BACKEND
 
-function App() {
+export default function App() {
   const [vessels, setVessels] = useState([])
   const [activeVesselID, setActiveVesselID] = useState(null)
   const [activePane, setActivePane] = useState(null)
@@ -88,5 +88,3 @@ function App() {
     </section>
   )
 }
-
-export default App

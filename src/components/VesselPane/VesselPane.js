@@ -1,12 +1,12 @@
 import React from 'react'
-import Underway from './vesselViews/Underway'
-import OutOfService from './vesselViews/OutOfService'
-import Docked from './vesselViews/Docked'
+import Underway from './Underway'
+import OutOfService from './OutOfService'
+import Docked from './Docked'
 
-import compass from './assets/compass.svg'
-import speedometer from './assets/speedometer.svg'
+import compass from '../../assets/compass.svg'
+import speedometer from '../../assets/speedometer.svg'
 
-function VesselPane({ vessel }) {
+export default function VesselPane({ vessel }) {
   let leftBlock
   if (vessel.isInService()) {
     if (vessel.isStopped()) {
@@ -46,5 +46,3 @@ function VesselPane({ vessel }) {
     </div>
   )
 }
-
-export default VesselPane

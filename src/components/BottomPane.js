@@ -1,6 +1,6 @@
 import React from 'react'
 
-function BottomPane({ header, headerColor, toRender }) {
+export default function BottomPane({ header, headerColor, toRender }) {
   const color = headerColor || 'bg-ferry-green'
 
   return (
@@ -12,5 +12,3 @@ function BottomPane({ header, headerColor, toRender }) {
     </section>
   )
 }
-
-export default BottomPane

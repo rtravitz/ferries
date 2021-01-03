@@ -1,8 +1,8 @@
 import React from 'react'
-import refresh from './assets/refresh.svg'
-import info from './assets/information-outline.svg'
+import refresh from '../assets/refresh.svg'
+import info from '../assets/information-outline.svg'
 
-function FixedControls({ refreshVessels, setInfo }) {
+export default function FixedControls({ refreshVessels, setInfo }) {
   return (
     <div className="fixed top-4 right-2 flex flex-col z-50 items-center">
       <button onClick={refreshVessels} className="bg-green-700 rounded-full h-16 w-16 p-2 shadow-md">
@@ -14,5 +14,3 @@ function FixedControls({ refreshVessels, setInfo }) {
     </div>
   )
 }
-
-export default FixedControls
