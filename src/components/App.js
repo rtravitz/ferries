@@ -7,6 +7,7 @@ import BottomPane from './BottomPane'
 import FixedControls from './FixedControls'
 import VesselPane from './VesselView'
 import InfoPane from './InfoView'
+import FetchError from './FetchError'
 
 const BACKEND = process.env.REACT_APP_BACKEND
 
@@ -14,14 +15,19 @@ export default function App() {
   const [vessels, setVessels] = useState([])
   const [activeVesselID, setActiveVesselID] = useState(null)
   const [activePane, setActivePane] = useState(null)
+  const [fetchErr, setFetchErr] = useState(false)
 
   const refreshVessels = () => {
     axios.get(BACKEND)
       .then(res => {
         const vessels = res.data.vessellist.map(v => new Vessel(v))
         setVessels(vessels)
+        setFetchErr(false)
       })
-      .catch(err => { console.log(err) })
+      .catch(err => { 
+        console.log(err)
+        setFetchErr(true)
+      })
   }
 
   useEffect(refreshVessels, [])
@@ -58,6 +64,7 @@ export default function App() {
 
   return (
     <section>
+      <FetchError active={fetchErr} />
       <MapContainer
         zoomControl={false}
         center={[47.965330, -122.659685]}

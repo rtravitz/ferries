@@ -16,3 +16,16 @@
   
   border-top: 20px solid #017359;
 }
+
+.alert-enter {
+  @apply opacity-0 transform scale-90
+}
+.alert-enter-active {
+  @apply opacity-100 transition transform translate-x-0 duration-500
+}
+.alert-exit {
+  @apply opacity-100 transition duration-500
+}
+.alert-exit-active {
+  @apply opacity-0 transition transform scale-90 duration-500
+}
