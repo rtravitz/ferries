@@ -6,7 +6,7 @@ import Docked from './Docked'
 import compass from '../../assets/compass.svg'
 import speedometer from '../../assets/speedometer.svg'
 
-export default function VesselPane({ vessel }) {
+export default function VesselView({ vessel }) {
   let leftBlock
   if (vessel.isInService()) {
     if (vessel.isStopped()) {

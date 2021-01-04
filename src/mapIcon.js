@@ -1,5 +1,5 @@
 import L from 'leaflet'
-import { OUTOFSERVICE, DELAYED } from './models/Vessel'
+import { STATUS_OUT_OF_SERVICE, STATUS_DELAYED } from './constants'
 import delayed from './assets/ferry-token-delayed.svg'
 import outOfService from './assets/ferry-token-out-of-service.svg'
 import good from './assets/ferry-token-good.svg'
@@ -9,9 +9,9 @@ const DEFAULT_W = 30
 
 export function makeIcon(status, selected) {
   let icon = good
-  if (status === OUTOFSERVICE) {
+  if (status === STATUS_OUT_OF_SERVICE) {
     icon = outOfService
-  } else if (status === DELAYED) {
+  } else if (status === STATUS_DELAYED) {
     icon = delayed
   }
 

@@ -1,6 +1,4 @@
-export const GOOD = 'GOOD'
-export const DELAYED = 'DELAYED'
-export const OUTOFSERVICE = 'OUTOFSERVICE'
+import { STATUS_GOOD, STATUS_DELAYED, STATUS_OUT_OF_SERVICE } from '../constants'
 
 export default class Vessel {
   constructor(v) {
@@ -38,9 +36,9 @@ export default class Vessel {
 
   status() {
     if (this.isInService()) {
-      return this.isDelayed() ? DELAYED : GOOD
+      return this.isDelayed() ? STATUS_DELAYED : STATUS_GOOD
     }
 
-    return OUTOFSERVICE
+    return STATUS_OUT_OF_SERVICE
   }
 }

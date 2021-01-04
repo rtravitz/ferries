@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { MapContainer, Marker, TileLayer } from 'react-leaflet'
 import axios from 'axios'
+import Vessel from '../models/Vessel'
 import { makeIcon } from '../mapIcon'
 import BottomPane from './BottomPane'
-import Vessel from '../models/Vessel'
-import VesselPane from './VesselPane'
 import FixedControls from './FixedControls'
-import InfoPane from './InfoPane'
+import VesselPane from './VesselView'
+import InfoPane from './InfoView'
 
 const BACKEND = process.env.REACT_APP_BACKEND
 
