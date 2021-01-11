@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function InfoPane() {
   return (
-    <div className="bg-gray-transparent-200 text-lg p-4">
+    <div className="bg-gray-transparent-200 text-lg p-4 pb-8">
       <p>Ferry Tracker uses the API that backs 
         <a className="text-green-700 underline" href="https://www.wsdot.com/ferries/vesselwatch/"> VesselWatch</a>. 
         I made it because I have a hard time reading the realtime map while using my phone in line at the dock.

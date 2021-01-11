@@ -24,7 +24,7 @@ export default function App() {
         setVessels(vessels)
         setFetchErr(false)
       })
-      .catch(err => { 
+      .catch(err => {
         console.log(err)
         setFetchErr(true)
       })
@@ -39,12 +39,17 @@ export default function App() {
     }
 
     return () => {
-      setActivePane({
-        component: <VesselPane vessel={vessel} />,
-        header: vessel.name,
-        headerColor,
-      })
-      setActiveVesselID(vessel.id)
+      if (activePane && activeVesselID === vessel.id) {
+        setActivePane(null)
+        setActiveVesselID(null)
+      } else {
+        setActivePane({
+          component: <VesselPane vessel={vessel} />,
+          header: vessel.name,
+          headerColor,
+        })
+        setActiveVesselID(vessel.id)
+      }
     }
   }
 
@@ -88,8 +93,8 @@ export default function App() {
           })
         }
       </MapContainer>
-      <FixedControls 
-        refreshVessels={refreshVessels} 
+      <FixedControls
+        refreshVessels={refreshVessels}
         setInfo={setInfo} />
       {
         activePane &&

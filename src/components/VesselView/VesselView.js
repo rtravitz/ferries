@@ -22,10 +22,10 @@ export default function VesselView({ vessel }) {
 
   return (
     <div className="flex">
-      <div className="w-1/2 p-2 flex flex-col items-center text-center bg-gray-transparent-200">
+      <div className="w-1/2 p-2 pb-8 flex flex-col items-center text-center bg-gray-transparent-200">
         {leftBlock}
       </div>
-      <div className="w-1/2 p-2 flex flex-col items-center justify-between bg-gray-transparent-300">
+      <div className="w-1/2 p-2 pb-8 flex flex-col items-center justify-between bg-gray-transparent-300">
         <div>
           <div className="flex items-end mb-2">
             <img className="w-10 mr-1" src={speedometer} alt="speedometer" />
