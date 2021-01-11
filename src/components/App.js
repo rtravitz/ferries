@@ -13,7 +13,6 @@ const BACKEND = process.env.REACT_APP_BACKEND
 
 export default function App() {
   const [vessels, setVessels] = useState([])
-  const [activeVesselID, setActiveVesselID] = useState(null)
   const [activePane, setActivePane] = useState(null)
   const [fetchErr, setFetchErr] = useState(false)
 
@@ -39,16 +38,15 @@ export default function App() {
     }
 
     return () => {
-      if (activePane && activeVesselID === vessel.id) {
+      if (activePane && activePane.vesselID === vessel.id) {
         setActivePane(null)
-        setActiveVesselID(null)
       } else {
         setActivePane({
           component: <VesselPane vessel={vessel} />,
           header: vessel.name,
           headerColor,
+          vesselID: vessel.id,
         })
-        setActiveVesselID(vessel.id)
       }
     }
   }
@@ -59,7 +57,6 @@ export default function App() {
     if (activePane && activePane.header === INFO) {
       setActivePane(null)
     } else {
-      setActiveVesselID(null)
       setActivePane({
         component: <InfoPane />,
         header: INFO
@@ -79,7 +76,7 @@ export default function App() {
           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />
         {
           vessels.map(v => {
-            const isSelected = activeVesselID === v.id
+            const isSelected = activePane && activePane.vesselID === v.id
             const icon = makeIcon(v.status(), isSelected)
 
             return (
@@ -88,7 +85,7 @@ export default function App() {
                 icon={icon}
                 position={[v.lat, v.lon]}
                 zIndexOffset={isSelected ? 1000 : 1}
-                eventHandlers={{ click: setVessel(v) }} />
+                eventHandlers={{ mousedown: setVessel(v) }} />
             )
           })
         }
