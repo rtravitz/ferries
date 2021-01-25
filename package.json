@@ -2,6 +2,13 @@
   "name": "ferries",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "lint": "eslint './src/**/*.{js,jsx}'",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "@craco/craco": "^6.0.0",
     "@tailwindcss/postcss7-compat": "^2.0.2",
@@ -20,18 +27,14 @@
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
     "web-vitals": "^0.2.4"
   },
-  "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "lint": "./node_modules/.bin/eslint",
-    "eject": "react-scripts eject"
-  },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "semi": ["error", "never"]
+    }
   },
   "browserslist": {
     "production": [
@@ -46,7 +49,6 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.2.0",
     "prettier": "^2.2.1"
   }
