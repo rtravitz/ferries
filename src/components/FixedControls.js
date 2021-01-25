@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import refresh from '../assets/refresh.svg'
 import info from '../assets/information-outline.svg'
 
-export default function FixedControls({ refreshVessels, setInfo, fetching }) {
+export default function FixedControls({ refreshVessels, setInfo }) {
   const [spinning, setSpinning] = useState('')
 
   return (
