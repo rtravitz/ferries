@@ -6,7 +6,7 @@ module.exports = {
   },
   theme: {
     extend: {
-      backgroundImage: theme => ({
+      backgroundImage: (theme) => ({
         'ferry-green': "url('/src/assets/ferry-good.svg')",
         'ferry-yellow': "url('/src/assets/ferry-delayed.svg')",
         'ferry-red': "url('/src/assets/ferry-out-of-service.svg')",
@@ -15,15 +15,15 @@ module.exports = {
         gray: {
           'transparent-200': 'rgba(229, 231, 235, 0.9)',
           'transparent-300': 'rgba(209, 213, 219, 0.9)',
-        }
+        },
       },
       animation: {
         'spin-once': 'spin 1s',
       },
-    },  
+    },
   },
   variants: {
     backgroundColor: ['responsive', 'hover', 'focus', 'active'],
   },
-  plugins: []
+  plugins: [],
 }
