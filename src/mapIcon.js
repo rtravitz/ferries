@@ -9,9 +9,12 @@ const DEFAULT_W = 30
 
 export function makeIcon(status, selected) {
   let icon = good
+  let alt = 'good ferry icon'
   if (status === STATUS_OUT_OF_SERVICE) {
+    alt = 'out of service ferry icon'
     icon = outOfService
   } else if (status === STATUS_DELAYED) {
+    alt = 'delayed ferry icon'
     icon = delayed
   }
 
@@ -21,10 +24,13 @@ export function makeIcon(status, selected) {
   const width = selected ? 40 : DEFAULT_W
   const height = selected ? 40 : DEFAULT_H
 
-  return new L.Icon({
-    className: classes,
-    iconUrl: icon,
-    iconRetinaUrl: icon,
-    iconSize: new L.Point(width, height),
-  })
+  return {
+    alt,
+    icon: new L.Icon({
+      className: classes,
+      iconUrl: icon,
+      iconRetinaUrl: icon,
+      iconSize: new L.Point(width, height),
+    }),
+  }
 }

@@ -24,8 +24,7 @@ export default function App() {
         setVessels(vessels)
         setFetchErr(false)
       })
-      .catch((err) => {
-        console.log(err)
+      .catch(() => {
         setFetchErr(true)
       })
   }
@@ -75,10 +74,11 @@ export default function App() {
         />
         {vessels.map((v) => {
           const isSelected = activePane && activePane.vesselID === v.id
-          const icon = makeIcon(v.status(), isSelected)
+          const { icon, alt } = makeIcon(v.status(), isSelected)
 
           return (
             <Marker
+              alt={alt}
               key={v.id}
               icon={icon}
               position={[v.lat, v.lon]}
