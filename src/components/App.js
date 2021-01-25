@@ -17,13 +17,14 @@ export default function App() {
   const [fetchErr, setFetchErr] = useState(false)
 
   const refreshVessels = () => {
-    axios.get(BACKEND)
-      .then(res => {
-        const vessels = res.data.vessellist.map(v => new Vessel(v))
+    axios
+      .get(BACKEND)
+      .then((res) => {
+        const vessels = res.data.vessellist.map((v) => new Vessel(v))
         setVessels(vessels)
         setFetchErr(false)
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err)
         setFetchErr(true)
       })
@@ -59,7 +60,7 @@ export default function App() {
     } else {
       setActivePane({
         component: <InfoPane />,
-        header: INFO
+        header: INFO,
       })
     }
   }
@@ -67,39 +68,34 @@ export default function App() {
   return (
     <section>
       <FetchError active={fetchErr} />
-      <MapContainer
-        zoomControl={false}
-        center={[47.965330, -122.659685]}
-        zoom={9}>
+      <MapContainer zoomControl={false} center={[47.96533, -122.659685]} zoom={9}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />
-        {
-          vessels.map(v => {
-            const isSelected = activePane && activePane.vesselID === v.id
-            const icon = makeIcon(v.status(), isSelected)
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        />
+        {vessels.map((v) => {
+          const isSelected = activePane && activePane.vesselID === v.id
+          const icon = makeIcon(v.status(), isSelected)
 
-            return (
-              <Marker
-                key={v.id}
-                icon={icon}
-                position={[v.lat, v.lon]}
-                zIndexOffset={isSelected ? 1000 : 1}
-                eventHandlers={{ mousedown: setVessel(v) }} />
-            )
-          })
-        }
+          return (
+            <Marker
+              key={v.id}
+              icon={icon}
+              position={[v.lat, v.lon]}
+              zIndexOffset={isSelected ? 1000 : 1}
+              eventHandlers={{ mousedown: setVessel(v) }}
+            />
+          )
+        })}
       </MapContainer>
-      <FixedControls
-        refreshVessels={refreshVessels}
-        setInfo={setInfo} />
-      {
-        activePane &&
+      <FixedControls refreshVessels={refreshVessels} setInfo={setInfo} />
+      {activePane && (
         <BottomPane
           toRender={activePane.component}
           header={activePane.header}
-          headerColor={activePane.headerColor} />
-      }
+          headerColor={activePane.headerColor}
+        />
+      )}
     </section>
   )
 }

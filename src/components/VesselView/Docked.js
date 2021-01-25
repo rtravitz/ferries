@@ -9,15 +9,13 @@ export default function Docked({ vessel }) {
   return (
     <>
       <p className="text-xl font-light">Docked at {vessel.lastDock}</p>
-      { nextDeparture }
-      { 
-        vessel.nextDock !== "" && (
-          <>
-            <div className="arrow-down my-2"></div>
-            <p className="text-xl font-light">{vessel.nextDock}</p>
-          </>
-        )
-      }
+      {nextDeparture}
+      {vessel.nextDock !== '' && (
+        <>
+          <div className="arrow-down my-2"></div>
+          <p className="text-xl font-light">{vessel.nextDock}</p>
+        </>
+      )}
     </>
   )
 }
