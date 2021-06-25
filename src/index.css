@@ -29,3 +29,8 @@
 .alert-exit-active {
   @apply opacity-0 transition transform scale-90 duration-500;
 }
+
+input:checked ~ .toggle-dot {
+  transform: translateX(100%);
+  background-color: #34D399;
+}

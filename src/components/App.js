@@ -7,7 +7,9 @@ import BottomPane from './BottomPane'
 import FixedControls from './FixedControls'
 import VesselPane from './VesselView'
 import InfoPane from './InfoView'
+import SettingsPane from './SettingsView'
 import FetchError from './FetchError'
+import useStickyState from '../stickyState'
 
 const BACKEND = process.env.REACT_APP_BACKEND
 
@@ -15,18 +17,26 @@ export default function App() {
   const [vessels, setVessels] = useState([])
   const [activePane, setActivePane] = useState(null)
   const [fetchErr, setFetchErr] = useState(false)
+  const [showOutOfService, setShowOutOfService] = useStickyState(false, 'showOutOfService')
 
   const refreshVessels = () => {
+    let isSubscribed = true
     axios
       .get(BACKEND)
       .then((res) => {
         const vessels = res.data.vessellist.map((v) => new Vessel(v))
-        setVessels(vessels)
-        setFetchErr(false)
+        if (isSubscribed) {
+          setVessels(vessels)
+          setFetchErr(false)
+        }
       })
       .catch(() => {
-        setFetchErr(true)
+        if (isSubscribed) {
+          setFetchErr(true)
+        }
       })
+
+    return () => isSubscribed = false
   }
 
   useEffect(refreshVessels, [])
@@ -64,6 +74,21 @@ export default function App() {
     }
   }
 
+  const setSettings = () => {
+    const SETTINGS = 'Settings'
+
+    if (activePane && activePane.header === SETTINGS) {
+      setActivePane(null)
+    } else {
+      setActivePane({
+        component: <SettingsPane 
+                      showOutOfService={showOutOfService}
+                      setShowOutOfService={setShowOutOfService} />,
+        header: SETTINGS,
+      })
+    }
+  }
+
   return (
     <section>
       <FetchError active={fetchErr} />
@@ -72,7 +97,15 @@ export default function App() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
-        {vessels.map((v) => {
+        {vessels
+          .filter((v) => {
+            if (!showOutOfService && !v.isInService()) {
+              return false
+            }
+
+            return true
+          })
+          .map((v) => {
           const isSelected = activePane && activePane.vesselID === v.id
           const { icon, alt } = makeIcon(v.status(), isSelected)
 
@@ -88,7 +121,10 @@ export default function App() {
           )
         })}
       </MapContainer>
-      <FixedControls refreshVessels={refreshVessels} setInfo={setInfo} />
+      <FixedControls 
+        refreshVessels={refreshVessels} 
+        setInfo={setInfo} 
+        setSettings={setSettings} />
       {activePane && (
         <BottomPane
           toRender={activePane.component}

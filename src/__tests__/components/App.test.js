@@ -45,4 +45,24 @@ describe('App', () => {
 
     expect(screen.getByText('Docked at Anacortes')).toBeInTheDocument()
   })
+
+  it('hides out of service vessels by default', async () => {
+    render(<App />)
+
+    const outOfServiceIcon = screen.queryByAltText('out of service ferry icon')
+
+    expect(outOfServiceIcon).toBeNull()
+  })
+
+  it('shows out of service vessels after toggling', async () => {
+    render(<App />)
+    
+    const settingsIcon = await screen.findByAltText('cog icon')
+    userEvent.click(settingsIcon)
+    const toggle = await screen.findByLabelText('Show out of service vessels')
+    userEvent.click(toggle)
+    const outOfServiceIcon = await screen.findByAltText('out of service ferry icon')
+
+    expect(outOfServiceIcon).toBeInTheDocument()
+  })
 })
