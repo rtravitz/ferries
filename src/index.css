@@ -34,3 +34,12 @@ input:checked ~ .toggle-dot {
   transform: translateX(100%);
   background-color: #34D399;
 }
+
+input,
+textarea,
+button,
+select,
+label,
+a {
+  -webkit-tap-highlight-color:transparent
+}
