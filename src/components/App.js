@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { MapContainer, Marker, TileLayer } from 'react-leaflet'
-import axios from 'axios'
 import Vessel from '../models/Vessel'
 import { makeIcon } from '../mapIcon'
 import BottomPane from './BottomPane'
@@ -21,10 +20,10 @@ export default function App() {
 
   const refreshVessels = () => {
     let isSubscribed = true
-    axios
-      .get(BACKEND)
+    fetch(BACKEND)
+      .then((res) => res.json())
       .then((res) => {
-        const vessels = res.data.vessellist.map((v) => new Vessel(v))
+        const vessels = res.vessellist.map((v) => new Vessel(v))
         if (isSubscribed) {
           setVessels(vessels)
           setFetchErr(false)
