@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { MapContainer, Marker, TileLayer } from 'react-leaflet'
 import Vessel from '../models/Vessel'
-import { makeFerryIcon, makePortIcon } from '../mapIcon'
+import { makeFerryIcon, makeTerminalIcon } from '../mapIcon'
 import BottomPane from './BottomPane'
 import FixedControls from './FixedControls'
 import VesselPane from './VesselView'
 import InfoPane from './InfoView'
 import SettingsPane from './SettingsView'
+import TerminalPane from './TerminalView'
 import FetchError from './FetchError'
 import useStickyState from '../stickyState'
 import { terminals } from '../data/terminals.json'
@@ -89,6 +90,20 @@ export default function App() {
     }
   }
 
+  const setTerminal = (terminal) => {
+    return () => {
+      if (activePane && activePane.terminalID === terminal.name) {
+        setActivePane(null)
+      } else {
+        setActivePane({
+          terminalID: terminal.name,
+          header: terminal.name,
+          component: <TerminalPane terminal={terminal} />
+        })
+      }
+    }
+  }
+
   return (
     <section>
       <FetchError active={fetchErr} />
@@ -104,10 +119,11 @@ export default function App() {
         {
           terminals.map((t) => (
             <Marker 
-              alt="port"
+              alt="terminal"
               position={[t.lat, t.lon]} 
               key={t.name} 
-              icon={makePortIcon()} />
+              eventHandlers={{ mousedown: setTerminal(t) }}
+              icon={makeTerminalIcon()} />
           ))
         }
         {vessels
