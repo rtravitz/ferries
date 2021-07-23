@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { MapContainer, Marker, TileLayer } from 'react-leaflet'
 import Vessel from '../models/Vessel'
-import { makeIcon } from '../mapIcon'
+import { makeFerryIcon, makePortIcon } from '../mapIcon'
 import BottomPane from './BottomPane'
 import FixedControls from './FixedControls'
 import VesselPane from './VesselView'
@@ -9,6 +9,7 @@ import InfoPane from './InfoView'
 import SettingsPane from './SettingsView'
 import FetchError from './FetchError'
 import useStickyState from '../stickyState'
+import { terminals } from '../data/terminals.json'
 
 const BACKEND = process.env.REACT_APP_BACKEND
 
@@ -100,6 +101,15 @@ export default function App() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
+        {
+          terminals.map((t) => (
+            <Marker 
+              alt="port"
+              position={[t.lat, t.lon]} 
+              key={t.name} 
+              icon={makePortIcon()} />
+          ))
+        }
         {vessels
           .filter((v) => {
             if (!showOutOfService && !v.isInService()) {
@@ -110,7 +120,7 @@ export default function App() {
           })
           .map((v) => {
           const isSelected = activePane && activePane.vesselID === v.id
-          const { icon, alt } = makeIcon(v.status(), isSelected)
+          const { icon, alt } = makeFerryIcon(v.status(), isSelected)
 
           return (
             <Marker

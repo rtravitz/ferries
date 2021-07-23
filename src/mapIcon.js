@@ -3,11 +3,12 @@ import { STATUS_OUT_OF_SERVICE, STATUS_DELAYED } from './constants'
 import delayed from './assets/ferry-token-delayed.svg'
 import outOfService from './assets/ferry-token-out-of-service.svg'
 import good from './assets/ferry-token-good.svg'
+import port from './assets/port.svg'
 
 const DEFAULT_H = 30
 const DEFAULT_W = 30
 
-export function makeIcon(status, selected) {
+export function makeFerryIcon(status, selected) {
   let icon = good
   let alt = 'good ferry icon'
   if (status === STATUS_OUT_OF_SERVICE) {
@@ -33,4 +34,12 @@ export function makeIcon(status, selected) {
       iconSize: new L.Point(width, height),
     }),
   }
+}
+
+export function makePortIcon() {
+  return new L.Icon({
+    iconUrl: port,
+    iconRetinaUrl: port,
+    iconSize: new L.Point(DEFAULT_W, DEFAULT_H),
+  })
 }
