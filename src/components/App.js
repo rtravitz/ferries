@@ -4,6 +4,7 @@ import Vessel from '../models/Vessel'
 import { makeFerryIcon, makeTerminalIcon } from '../mapIcon'
 import BottomPane from './BottomPane'
 import FixedControls from './FixedControls'
+import RouteSearch from './RouteSearch'
 import VesselPane from './VesselView'
 import InfoPane from './InfoView'
 import SettingsPane from './SettingsView'
@@ -153,6 +154,7 @@ export default function App() {
           )
         })}
       </MapContainer>
+      <RouteSearch />
       <FixedControls 
         refreshVessels={refreshVessels} 
         setInfo={setInfo} 
