@@ -43,9 +43,9 @@ export default function App() {
   useEffect(refreshVessels, [])
 
   const setVessel = (vessel) => {
-    let headerColor = 'bg-ferry-red'
+    let headerBackground = 'bg-ferry-red'
     if (vessel.isInService()) {
-      headerColor = vessel.isDelayed() ? 'bg-ferry-yellow' : 'bg-ferry-green'
+      headerBackground = vessel.isDelayed() ? 'bg-ferry-yellow' : 'bg-ferry-green'
     }
 
     return () => {
@@ -54,8 +54,8 @@ export default function App() {
       } else {
         setActivePane({
           component: <VesselPane vessel={vessel} />,
-          header: vessel.name,
-          headerColor,
+          headerText: vessel.name,
+          headerBackground,
           vesselID: vessel.id,
         })
       }
@@ -70,7 +70,7 @@ export default function App() {
     } else {
       setActivePane({
         component: <InfoPane />,
-        header: INFO,
+        headerText: INFO,
       })
     }
   }
@@ -85,24 +85,27 @@ export default function App() {
         component: <SettingsPane 
                       showOutOfService={showOutOfService}
                       setShowOutOfService={setShowOutOfService} />,
-        header: SETTINGS,
+        headerText: SETTINGS,
       })
     }
   }
 
-  const setTerminal = (terminal) => {
+  const setTerminal = (terminal, vessels) => {
     return () => {
       if (activePane && activePane.terminalID === terminal.name) {
         setActivePane(null)
       } else {
         setActivePane({
           terminalID: terminal.name,
-          header: terminal.name,
-          component: <TerminalPane terminal={terminal} />
+          headerText: terminal.name,
+          headerBackground: 'bg-terminal',
+          component: <TerminalPane terminal={terminal} vessels={vessels} />
         })
       }
     }
   }
+
+  const getVesselsForTerminal = (vessels, terminalName) => vessels.filter(v => v.routeIncludesTerminal(terminalName))
 
   return (
     <section>
@@ -122,7 +125,7 @@ export default function App() {
               alt="terminal"
               position={[t.lat, t.lon]} 
               key={t.name} 
-              eventHandlers={{ mousedown: setTerminal(t) }}
+              eventHandlers={{ mousedown: setTerminal(t, getVesselsForTerminal(vessels, t.name)) }}
               icon={makeTerminalIcon()} />
           ))
         }
@@ -157,8 +160,8 @@ export default function App() {
       {activePane && (
         <BottomPane
           toRender={activePane.component}
-          header={activePane.header}
-          headerColor={activePane.headerColor}
+          headerText={activePane.headerText}
+          headerBackground={activePane.headerBackground}
         />
       )}
     </section>

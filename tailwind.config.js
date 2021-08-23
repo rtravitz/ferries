@@ -10,6 +10,7 @@ module.exports = {
         'ferry-green': "url('/src/assets/ferry-good.svg')",
         'ferry-yellow': "url('/src/assets/ferry-delayed.svg')",
         'ferry-red': "url('/src/assets/ferry-out-of-service.svg')",
+        'terminal': "url('/src/assets/terminal-header-6.svg')",
       }),
       colors: {
         gray: {

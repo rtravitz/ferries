@@ -18,6 +18,10 @@ export default class Vessel {
     this.headingText = v.headtxt
   }
 
+  routeIncludesTerminal(terminalName) {
+    return this.lastDock === terminalName || this.nextDock === terminalName
+  }
+
   isInService() {
     return this.inService === 'True'
   }
