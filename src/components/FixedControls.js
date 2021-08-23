@@ -7,7 +7,7 @@ export default function FixedControls({ refreshVessels, setInfo, setSettings }) 
   const [spinning, setSpinning] = useState('')
 
   return (
-    <div className="fixed top-4 right-2 flex flex-col z-50 items-center">
+    <div className="fixed top-4 right-2 flex flex-col z-20 items-center">
       <button
         onClick={() => {
           refreshVessels()

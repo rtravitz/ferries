@@ -4,7 +4,7 @@ export default function BottomPane({ headerText, headerBackground, toRender }) {
   const background = headerBackground || 'bg-ferry-green'
 
   return (
-    <section className="fixed bottom-0 z-50 w-full">
+    <section className="fixed bottom-0 z-20 w-full">
       <div
         className={`${background} bg-center bg-contain bg-no-repeat h-20 flex flew-row justify-center items-center`}
       >

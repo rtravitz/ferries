@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
+import terminals from '../data/terminals.json'
+import AutocompleteBox from './AutocompleteBox'
+
+const items = terminals.terminals.map(t => t.name)
 
 function RouteSearch() {
+  const [fromSelected, setFromSelected] = useState(null)
+  const [toSelected, setToSelected] = useState(null)
+
   return (
-    <div className="rounded-full bg-green-700 fixed top-4 inset-x-0 w-6/12 mx-auto z-50 h-12 flex justify-between p-2">
-      <div className="rounded-l-full w-1/2 mr-1 bg-gray-200 flex items-center justify-center">
-        <p>FROM</p>
-      </div>
-      <div className="rounded-r-full w-1/2 ml-1 bg-gray-200 flex items-center justify-center">
-        <p>TO</p>
-      </div>
+    <div className="fixed top-4 left-2 z-40 flex flex-col">
+      <AutocompleteBox items={items} label="FROM" setSelected={setFromSelected} /> 
+      <AutocompleteBox items={items} label="TO" setSelected={setToSelected} />
     </div>
   )
 }
