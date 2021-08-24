@@ -5,13 +5,21 @@ import AutocompleteBox from './AutocompleteBox'
 const items = terminals.terminals.map(t => t.name)
 
 function RouteSearch() {
-  const [fromSelected, setFromSelected] = useState(null)
-  const [toSelected, setToSelected] = useState(null)
+  const [originSelected, setOriginSelected] = useState('')
+  const [destinationSelected, setDestinationSelected] = useState('')
 
   return (
     <div className="fixed top-4 left-2 z-40 flex flex-col">
-      <AutocompleteBox items={items} label="FROM" setSelected={setFromSelected} /> 
-      <AutocompleteBox items={items} label="TO" setSelected={setToSelected} />
+      <AutocompleteBox
+        items={items}
+        label="ORIGIN"
+        selected={originSelected}
+        setSelected={setOriginSelected} />
+      <AutocompleteBox
+        items={items}
+        label="DESTINATION"
+        selected={destinationSelected}
+        setSelected={setDestinationSelected} />
     </div>
   )
 }
