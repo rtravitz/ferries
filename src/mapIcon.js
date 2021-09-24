@@ -19,8 +19,8 @@ export function makeIcon(status, selected) {
   }
 
   const classes = selected
-    ? 'bg-blue-500 rounded-full shadow-md transition-height duration-500'
-    : ''
+    ? 'bg-blue-secondary border-solid border border-gray-200 rounded-full shadow-md transition-height duration-500'
+    : 'bg-transparent border-none shadow-none transition-height duration-500'
   const width = selected ? 40 : DEFAULT_W
   const height = selected ? 40 : DEFAULT_H
 

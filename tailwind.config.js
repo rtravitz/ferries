@@ -15,7 +15,15 @@ module.exports = {
         gray: {
           'transparent-200': 'rgba(229, 231, 235, 0.9)',
           'transparent-300': 'rgba(209, 213, 219, 0.9)',
+          'transparent-600': 'rgba(75, 85, 99, 0.4)',
         },
+        blue: {
+          'secondary': '#44A5DE',
+        },
+        green: {
+          'dark': '#384B42',
+          'light': '#9AB0A6',
+        }
       },
       animation: {
         'spin-once': 'spin 1s',
