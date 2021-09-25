@@ -130,6 +130,7 @@ export default function App() {
         setSettings={setSettings} />
       {activePane && (
         <BottomPane
+          setActivePane={setActivePane}
           toRender={activePane.component}
           header={activePane.header}
           headerColor={activePane.headerColor}
