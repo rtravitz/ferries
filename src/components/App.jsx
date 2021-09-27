@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { MapContainer, Marker, TileLayer } from 'react-leaflet'
 import Vessel from '../models/Vessel'
 import { makeIcon } from '../mapIcon'
-import BottomPane from './BottomPane'
 import FixedControls from './FixedControls'
 import VesselPane from './VesselView'
 import InfoPane from './InfoView'
 import SettingsPane from './SettingsView'
 import FetchError from './FetchError'
+import SlidingBottomPane from './SlidingBottomPane'
 import useStickyState from '../stickyState'
 
 const BACKEND = process.env.REACT_APP_BACKEND
@@ -128,14 +128,9 @@ export default function App() {
         refreshVessels={refreshVessels} 
         setInfo={setInfo} 
         setSettings={setSettings} />
-      {activePane && (
-        <BottomPane
-          setActivePane={setActivePane}
-          toRender={activePane.component}
-          header={activePane.header}
-          headerColor={activePane.headerColor}
-        />
-      )}
+      <SlidingBottomPane 
+        activePane={activePane} 
+        setActivePane={setActivePane} />
     </section>
   )
 }
