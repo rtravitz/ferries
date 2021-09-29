@@ -4,8 +4,8 @@ import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom/extend-expect'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
-import App from '../../components/App'
-import vesselsFixture from '../../mocks/fixtures/vessels.json'
+import App from '../../src/components/App'
+import vesselsFixture from '../../src/mocks/fixtures/vessels.json'
 
 describe('App', () => {
   const server = setupServer(

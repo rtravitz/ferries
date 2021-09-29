@@ -1,5 +1,5 @@
-import Vessel from '../../models/Vessel'
-import { STATUS_DELAYED, STATUS_GOOD, STATUS_OUT_OF_SERVICE } from '../../constants'
+import Vessel from '../../src/models/Vessel'
+import { STATUS_DELAYED, STATUS_GOOD, STATUS_OUT_OF_SERVICE } from '../../src/constants'
 
 describe('Vessel', () => {
   describe('isInService', () => {

@@ -1,6 +1,6 @@
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
-const { handler } = require('../../api/vessels')
+const { handler } = require('../../src/api/vessels')
 
 describe('vessels lambda', () => {
   const server = setupServer(
