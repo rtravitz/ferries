@@ -1,8 +1,8 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-import VesselView from '../../components/VesselView'
-import Vessel from '../../models/Vessel'
+import VesselView from '../../src/components/VesselView'
+import Vessel from '../../src/models/Vessel'
 
 describe('VesselView', () => {
   const defaultMovingVessel = {

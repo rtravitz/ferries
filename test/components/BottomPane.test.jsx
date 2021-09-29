@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-import BottomPane from '../../components/BottomPane'
+import BottomPane from '../../src/components/BottomPane'
 
 describe('BottomPane', () => {
   it('defaults to a green background color in the header', () => {

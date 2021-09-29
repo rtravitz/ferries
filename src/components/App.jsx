@@ -10,7 +10,7 @@ import FetchError from './FetchError'
 import SlidingBottomPane from './SlidingBottomPane'
 import useStickyState from '../stickyState'
 
-const BACKEND = process.env.REACT_APP_BACKEND
+const BACKEND = import.meta.env.VITE_BACKEND
 
 export default function App() {
   const [vessels, setVessels] = useState([])
