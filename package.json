@@ -17,7 +17,7 @@
     "leaflet": "^1.7.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-leaflet": "^3.2.0",
+    "react-leaflet": "^3.2.1",
     "react-scripts": "4.0.3",
     "react-use-measure": "^2.0.4"
   },
@@ -42,11 +42,7 @@
       ]
     }
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not op_mini all"
-  ],
+  "browserslist": [ "last 2 versions" ],
   "msw": {
     "workerDirectory": "public"
   }
