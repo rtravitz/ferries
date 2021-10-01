@@ -3,7 +3,7 @@
   "short_name": "Ferry Tracker",
   "icons": [
     {
-      "src": "ferry-icon.svg",
+      "src": "ferry-icon-512.png",
       "sizes": "72x72 96x96 128x128 192x192 256x256 512x512",
       "purpose": "any maskable"
     }
