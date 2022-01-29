@@ -1,7 +1,6 @@
 module.exports = {
   mode: 'jit',
-  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
-  darkMode: false,
+  content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   theme: {
     extend: {
       backgroundImage: (theme) => ({
@@ -21,15 +20,13 @@ module.exports = {
         green: {
           'dark': '#384B42',
           'light': '#9AB0A6',
+          'brand': '#047857',
         }
       },
       animation: {
         'spin-once': 'spin 1s',
       },
     },
-  },
-  variants: {
-    backgroundColor: ['responsive', 'hover', 'focus', 'active'],
   },
   plugins: [],
 }

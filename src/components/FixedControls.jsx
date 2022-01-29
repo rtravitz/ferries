@@ -16,19 +16,19 @@ export default function FixedControls({ refreshVessels, setInfo, setSettings }) 
         onAnimationEnd={() => {
           setSpinning('')
         }}
-        className="bg-green-700 active:bg-green-900 rounded-full h-16 w-16 p-2 shadow-lg select-none"
+        className="bg-green-brand active:bg-green-900 rounded-full h-16 w-16 p-2 shadow-lg select-none"
       >
         <img className={spinning} src={refresh} alt="refresh arrow" />
       </button>
       <button
         onClick={setInfo}
-        className="bg-green-700 active:bg-green-900 rounded-full h-10 w-10 p-2 mt-4 shadow-lg select-none"
+        className="bg-green-brand active:bg-green-900 rounded-full h-10 w-10 p-2 mt-4 shadow-lg select-none"
       >
         <img className="" src={info} alt="info icon" />
       </button>
       <button
         onClick={setSettings}
-        className="bg-green-700 active:bg-green-900 rounded-full h-10 w-10 p-2 mt-4 shadow-lg select-none"
+        className="bg-green-brand active:bg-green-900 rounded-full h-10 w-10 p-2 mt-4 shadow-lg select-none"
       >
         <img className="" src={cog} alt="cog icon" />
       </button>
