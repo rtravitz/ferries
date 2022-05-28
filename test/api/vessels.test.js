@@ -32,7 +32,7 @@ describe('vessels lambda', () => {
 
     expect(result).toEqual({
       statusCode: 500,
-      body: 'Error: Request failed with status code 503',
+      body: 'AxiosError: Request failed with status code 503',
     })
   })
 })

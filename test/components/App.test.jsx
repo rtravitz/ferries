@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom/extend-expect'
 import { rest } from 'msw'
@@ -43,7 +43,7 @@ describe('App', () => {
 
     userEvent.click(icon)
 
-    expect(screen.getByText('Docked at Anacortes')).toBeInTheDocument()
+    await waitFor(() => expect(screen.getByText('Docked at Anacortes')).toBeInTheDocument())
   })
 
   it('hides out of service vessels by default', async () => {
