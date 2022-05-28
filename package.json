@@ -5,8 +5,7 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "test": "vitest",
-    "lint": "eslint './src/**/*.{js,jsx}'"
+    "test": "vitest"
   },
   "dependencies": {
     "@react-spring/web": "^9.4.2",
@@ -31,18 +30,6 @@
     "tailwindcss": "^3.0.16",
     "vite": "^2.7.13",
     "vitest": "^0.12.9"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "rules": {
-      "semi": [
-        "error",
-        "never"
-      ]
-    }
   },
   "browserslist": [
     "last 2 versions"

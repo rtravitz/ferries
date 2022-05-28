@@ -1,8 +1,5 @@
 import '@testing-library/jest-dom'
 
-// Fixes an error in vessels.test.js: https://stackoverflow.com/questions/42535270/regeneratorruntime-is-not-defined-when-running-jest-test
-import 'regenerator-runtime/runtime'
-
 // fetch doesn't exist without polyfilling it for the tests
 import 'isomorphic-fetch'
 
