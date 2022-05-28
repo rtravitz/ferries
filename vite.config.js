@@ -6,4 +6,9 @@ export default defineConfig({
     outDir: './build',
   },
   plugins: [reactRefresh()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './test-setup.js'
+  },
 })
