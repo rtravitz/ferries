@@ -9,12 +9,12 @@ import vesselsFixture from '../../src/mocks/fixtures/vessels.json'
 
 describe('App', () => {
   const server = setupServer(
-    rest.get('http://localhost:5000/ferries', (req, res, ctx) => {
+    rest.get('http://localhost:5273/ferries', (req, res, ctx) => {
       return res(ctx.json(vesselsFixture))
     }),
   )
 
-  beforeAll(() => server.listen())
+  beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
   afterEach(() => server.resetHandlers())
   afterAll(() => server.close())
 
@@ -26,7 +26,7 @@ describe('App', () => {
 
   it('shows an error message when vessels fail to update', async () => {
     server.use(
-      rest.get('http://localhost:5000/ferries', (req, res, ctx) => {
+      rest.get('http://localhost:5273/ferries', (req, res, ctx) => {
         return res(ctx.status(500), ctx.json({ message: 'You sunk my battleship!' }))
       }),
     )

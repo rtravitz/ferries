@@ -1,9 +1,7 @@
 import '@testing-library/jest-dom'
+import fetch from 'node-fetch'
 
-// fetch doesn't exist without polyfilling it for the tests
-import 'isomorphic-fetch'
-
-process.env.VITE_BACKEND = 'http://localhost:5000/ferries'
+process.env.VITE_BACKEND = 'http://localhost:5273/ferries'
 
 const noop = () => {}
 Object.defineProperty(window, 'scrollTo', { value: noop, writable: true })
@@ -15,4 +13,5 @@ class ResizeObserver {
 }
 
 window.ResizeObserver = ResizeObserver
+window.fetch = fetch
 
