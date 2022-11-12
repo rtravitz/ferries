@@ -8,12 +8,15 @@ import InfoPane from './InfoView'
 import SettingsPane from './SettingsView'
 import FetchError from './FetchError'
 import SlidingBottomPane from './SlidingBottomPane'
-import useStickyState from '../stickyState'
+import { useStickyState, useDelayUnmount } from '../hooks'
+import { LoadingScreen } from './LoadingScreen'
 
 const BACKEND = import.meta.env.VITE_BACKEND
 
 export default function App() {
   const [vessels, setVessels] = useState([])
+  const [firstLoadComplete, setFirstLoadComplete] = useState(false)
+  const shouldRenderLoadingScreen = useDelayUnmount(!firstLoadComplete, 1050)
   const [activePane, setActivePane] = useState(null)
   const [fetchErr, setFetchErr] = useState(false)
   const [showOutOfService, setShowOutOfService] = useStickyState(false, 'showOutOfService')
@@ -32,6 +35,11 @@ export default function App() {
       .catch(() => {
         if (isSubscribed) {
           setFetchErr(true)
+        }
+      })
+      .finally(() => {
+        if (!firstLoadComplete) {
+          setFirstLoadComplete(true)
         }
       })
 
@@ -90,6 +98,7 @@ export default function App() {
 
   return (
     <section>
+      { shouldRenderLoadingScreen && <LoadingScreen firstLoadComplete={firstLoadComplete} /> }
       <FetchError active={fetchErr} />
       {/* 
         Mobile Safari was spawning multiple click events with Leaflet, making it difficult to
