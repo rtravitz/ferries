@@ -1,11 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="90px" height="44px" viewBox="0 0 90 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
-    <title>olympic-ferry</title>
-    <desc>Created with Sketch.</desc>
-    <g id="ferry-tracker" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="olympic-ferry" transform="translate(-1261.000000, -274.000000)" fill="#B91C1C" stroke="#E5E7EB" stroke-width="3">
-            <path d="M1297.37456,275.5 L1282.5,275.5 L1282.5,284.409408 L1279.12021,284.409408 L1279.12021,297.409408 L1263.66359,297.409408 L1275.53373,316.987805 L1336.5272,316.987805 L1348.34276,297.409408 L1332.87979,297.409408 L1332.87979,284.409408 L1329.37456,284.409408 L1329.37456,275.5 L1314.5,275.5 L1314.5,284.409408 L1297.37456,284.409408 L1297.37456,275.5 Z" id="Combined-Shape"></path>
-        </g>
-    </g>
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="90" height="44">
+  <path fill="#B91C1C" fill-rule="evenodd" stroke="#E5E7EB" stroke-width="3" d="M36.375 1.5H21.5v8.91h-3.38v13H2.664l11.87 19.578h60.993l11.816-19.579H71.88v-13h-3.505V1.5H53.5v8.91H36.375V1.5Z"/>
 </svg>
