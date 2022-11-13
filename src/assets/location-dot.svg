@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70">
+  <g fill="none" fill-rule="evenodd">
+    <circle cx="35" cy="35" r="35" fill="#FFF"/>
+    <circle cx="35.5" cy="35.5" r="20" fill="#44A5DE">
+      <animate attributeName="r" values="22;27;22" dur="5000ms" repeatCount="indefinite" />
+    </circle>
+  </g>
+</svg>
