@@ -10,11 +10,13 @@ import FetchError from './FetchError'
 import SlidingBottomPane from './SlidingBottomPane'
 import { useStickyState, useDelayUnmount } from '../hooks'
 import { LoadingScreen } from './LoadingScreen'
+import locationDot from '../assets/location-dot.svg'
 
 const BACKEND = import.meta.env.VITE_BACKEND
 
 export default function App() {
   const [vessels, setVessels] = useState([])
+  const [userLocation, setUserLocation] = useState(null)
   const [firstLoadComplete, setFirstLoadComplete] = useState(false)
   const shouldRenderLoadingScreen = useDelayUnmount(!firstLoadComplete, 1050)
   const [activePane, setActivePane] = useState(null)
@@ -104,7 +106,11 @@ export default function App() {
         Mobile Safari was spawning multiple click events with Leaflet, making it difficult to
         select a marker. Setting tap={false} solves, this: https://github.com/Leaflet/Leaflet/issues/7255
        */}
-      <MapContainer zoomControl={false} center={[47.96533, -122.659685]} zoom={9} tap={false}>
+      <MapContainer 
+        zoomControl={false} 
+        center={[47.96533, -122.659685]} 
+        zoom={9} 
+        tap={false}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -132,14 +138,27 @@ export default function App() {
             />
           )
         })}
-      </MapContainer>
+        { userLocation &&
+          <Marker
+            alt="user location"
+            key="user location"
+            icon={new L.Icon({
+              iconUrl: locationDot,
+              iconRetinaUrl: locationDot,
+              iconSize: new L.Point(15, 15),
+            })}
+            position={[userLocation.latitude, userLocation.longitude]}
+          />
+        }
       <FixedControls 
         refreshVessels={refreshVessels} 
         setInfo={setInfo} 
+        setUserLocation={setUserLocation}
         setSettings={setSettings} />
       <SlidingBottomPane 
         activePane={activePane} 
         setActivePane={setActivePane} />
+      </MapContainer>
     </section>
   )
 }
