@@ -41,9 +41,9 @@ export default function VesselView({ vessel }) {
         </div>
         <a
           href={wsdotPage}
-          className="bg-green-brand py-2 px-4 mt-4 mb-2 font-semibold shadow rounded-lg text-gray-200"
+          className="bg-green-brand py-2 px-4 mt-4 mb-2 shadow rounded-lg"
         >
-          Boat Notes
+          <h3 className="text-gray-200 font-semibold">Boat Notes</h3>
         </a>
       </div>
     </div>
