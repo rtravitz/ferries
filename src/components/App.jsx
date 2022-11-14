@@ -154,6 +154,7 @@ export default function App() {
         refreshVessels={refreshVessels} 
         setInfo={setInfo} 
         setUserLocation={setUserLocation}
+        userLocation={userLocation}
         setSettings={setSettings} />
       <SlidingBottomPane 
         activePane={activePane} 
