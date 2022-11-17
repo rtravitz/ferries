@@ -36,7 +36,7 @@
 
 input:checked ~ .toggle-dot {
   transform: translateX(100%);
-  background-color: #34D399;
+  background-color: #047857;
 }
 
 input,
