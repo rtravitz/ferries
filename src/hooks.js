@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 export function useStickyState(defaultValue, key) {
   const [value, setValue] = useState(() => {
@@ -31,4 +31,10 @@ export function useDelayUnmount(isMounted, delayTime) {
   }, [isMounted, delayTime, shouldRender])
   
   return shouldRender
+}
+
+export function usePrevious(value) {
+  const ref = useRef()
+  useEffect(() => { ref.current = value }, [value])
+  return ref.current
 }

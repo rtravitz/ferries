@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import { useMap } from 'react-leaflet/hooks'
+import { usePrevious } from '../hooks'
 
 export function FindLocationButton({ userLocation, setUserLocation }) {
   const [watchId, setWatchId] = useState(null)
 
   const map = useMap()
+  const prevLocation = usePrevious(userLocation)
 
-  // Remove the watch when the component unmounts if one exists
+  // Only fly to the user's location if it's the first time that they're activating location tracking.
+  // There's a separate button that handles recentering for preexisting tracking sessions.
+  useEffect(() => {
+    if (!prevLocation && userLocation) {
+      map.flyTo([userLocation.latitude, userLocation.longitude], 15)    
+    }
+  }, [userLocation])
+
+  // Remove the watch when the component unmounts if one exists. This may not be strictly necessary, because
+  // this component stays mounted the whole time on the page, but it's here in case that changes in the future.
   useEffect(() => {
     return () => { if (watchId) { navigator.geolocation.clearWatch(watchId) } }
-  })
+  }, [watchId])
 
   const success = (pos) => {
-    const crd = pos.coords;
-
-    const firstTime = userLocation === null
-
-    setUserLocation(crd)
-
-    if (firstTime) {
-      map.flyTo([crd.latitude, crd.longitude], 15)    
-    }
+    setUserLocation(pos.coords)
   }
 
   const error = (err) => {
@@ -28,11 +31,7 @@ export function FindLocationButton({ userLocation, setUserLocation }) {
   }
 
   const startLocationWatch = () => {
-    const id = navigator.geolocation.watchPosition(success, error, {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0,
-    })
+    const id = navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true })
 
     setWatchId(id)
   }
@@ -44,11 +43,7 @@ export function FindLocationButton({ userLocation, setUserLocation }) {
   }
 
   const handleClick = () => {
-    if (watchId) {
-      endLocationWatch()
-    } else {
-      startLocationWatch()
-    }
+    watchId ? endLocationWatch() : startLocationWatch()
   }
 
   if (!navigator.geolocation) {
