@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export default function InfoPane() {
   return (
@@ -9,12 +9,11 @@ export default function InfoPane() {
           {' '}
           VesselWatch
         </a>
-        . I made it because I have a hard time reading the realtime map while using my phone in line
-        at the dock.
+        . I made it because I have a hard time reading the realtime map while using my phone in line at the dock.
       </p>
       <p className="mt-4">
-        To be kind to the WSDOT servers, this app only updates vessel information on first load or
-        when you explicitly tap the refresh button in the upper-right corner.
+        To be kind to the WSDOT servers, this app only updates vessel information on first load or when you explicitly
+        tap the refresh button in the upper-right corner.
       </p>
       <p className="mt-4">
         The source code is{' '}
@@ -24,5 +23,5 @@ export default function InfoPane() {
         .
       </p>
     </div>
-  )
+  );
 }

@@ -1,29 +1,23 @@
-import React, { useState } from 'react'
-import { FindLocationButton } from './FindLocationButton'
-import { RecenterOnUserButton } from './RecenterOnUserButton'
-import refresh from '../assets/refresh.svg'
-import info from '../assets/information-outline.svg'
-import cog from '../assets/cog.svg'
+import React, { useState } from 'react';
+import { FindLocationButton } from './FindLocationButton';
+import { RecenterOnUserButton } from './RecenterOnUserButton';
+import refresh from '../assets/refresh.svg';
+import info from '../assets/information-outline.svg';
+import cog from '../assets/cog.svg';
 
-export default function FixedControls({ 
-  refreshVessels,
-  setInfo,
-  setSettings,
-  setUserLocation,
-  userLocation,
-}) {
-  const [spinning, setSpinning] = useState('')
+export default function FixedControls({ refreshVessels, setInfo, setSettings, setUserLocation, userLocation }) {
+  const [spinning, setSpinning] = useState('');
 
   return (
     <div className="fixed top-4 right-2 flex flex-col z-max items-center">
       <button
         title="Refresh vessel data"
         onClick={() => {
-          refreshVessels()
-          setSpinning('animate-spin-once')
+          refreshVessels();
+          setSpinning('animate-spin-once');
         }}
         onAnimationEnd={() => {
-          setSpinning('')
+          setSpinning('');
         }}
         className="bg-green-brand active:bg-green-900 rounded-full h-16 w-16 p-2 shadow-lg select-none"
       >
@@ -44,7 +38,7 @@ export default function FixedControls({
         <img className="" src={cog} alt="cog icon" />
       </button>
       <FindLocationButton userLocation={userLocation} setUserLocation={setUserLocation} />
-      { userLocation && <RecenterOnUserButton userLocation={userLocation} /> }
+      {userLocation && <RecenterOnUserButton userLocation={userLocation} />}
     </div>
-  )
+  );
 }

@@ -10,7 +10,7 @@ Check it out for yourself at https://ferries.ryantravitz.com
 
 ### Running locally
 
-Clone the app, make sure to have the most recent LTS version of Node available, and `npm install`. 
+Clone the app, make sure to have the most recent LTS version of Node available, and `npm install`.
 
 Two other things to know:
 
@@ -19,7 +19,7 @@ Two other things to know:
 
 ### Tests
 
-The tests all live under `src/__tests__`. They primarily use [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/) with some support from [msw](https://www.npmjs.com/package/msw) for mocking network requests. Vitest handles all of the hard work of setting up the test environment just right with jsdom, et al. You can run everything with `npm test`. 
+The tests all live under `src/__tests__`. They primarily use [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/) with some support from [msw](https://www.npmjs.com/package/msw) for mocking network requests. Vitest handles all of the hard work of setting up the test environment just right with jsdom, et al. You can run everything with `npm test`.
 
 ### Deployment
 
@@ -28,6 +28,7 @@ Each new PR will generate a staging link to review. Once a PR is merged, the cha
 ### Libraries and Services
 
 #### App
+
 - [React](https://reactjs.org/)
 - [tailwindcss](https://tailwindcss.com/)
 - [Leaflet](https://leafletjs.com/)
@@ -35,8 +36,8 @@ Each new PR will generate a staging link to review. Once a PR is merged, the cha
 - [OpenStreetMap](https://www.openstreetmap.org/)
 
 #### Development
+
 - [Vite](https://vitejs.dev/)
 - [Vitest](https://vitest.dev/)
 - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 - [msw](https://www.npmjs.com/package/msw)
-

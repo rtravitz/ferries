@@ -1,19 +1,19 @@
-import '@testing-library/jest-dom'
-import fetch from 'node-fetch'
+import '@testing-library/jest-dom';
+import fetch from 'node-fetch';
 
- process.env.VITE_BACKEND = 'http://localhost:5273/api/vessels'
+process.env.VITE_BACKEND = 'http://localhost:5273/api/vessels';
 
-const noop = () => {}
-Object.defineProperty(window, 'scrollTo', { value: noop, writable: true })
+const noop = () => {};
+Object.defineProperty(window, 'scrollTo', { value: noop, writable: true });
 
 class ResizeObserver {
-    observe() {}
-    unobserve() {}
-    disconnect() {}
+  observe() {}
+  unobserve() {}
+  disconnect() {}
 }
 
-window.ResizeObserver = ResizeObserver
-window.fetch = fetch
+window.ResizeObserver = ResizeObserver;
+window.fetch = fetch;
 
 // Uncomment the following to reduce testing library error output.
 // Useful for reducing DOM noise when debugging msw matching errors.

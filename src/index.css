@@ -45,7 +45,7 @@ button,
 select,
 label,
 a {
-  -webkit-tap-highlight-color:transparent
+  -webkit-tap-highlight-color: transparent;
 }
 
 .circle {
@@ -57,9 +57,15 @@ a {
 }
 
 @keyframes bobble {
-  0% { transform: scale(.9, .9); }
-  50% { transform: scale(1, 1); }
-  100% { transform: scale(.9, .9); }
+  0% {
+    transform: scale(0.9, 0.9);
+  }
+  50% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(0.9, 0.9);
+  }
 }
 
 @keyframes scaleOut {

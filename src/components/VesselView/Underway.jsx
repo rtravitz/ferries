@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export default function Underway({ vessel }) {
   return (
@@ -9,5 +9,5 @@ export default function Underway({ vessel }) {
       <h3 className="text-xl font-light">{vessel.nextDock}</h3>
       <h5 className="font-semibold text-2xl">{vessel.eta}</h5>
     </>
-  )
+  );
 }

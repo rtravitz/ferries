@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 export default function Docked({ vessel }) {
-  let nextDeparture = null
+  let nextDeparture = null;
   if (vessel.hasNextDeparture()) {
-    nextDeparture = <p className="font-semibold">Scheduled departure at {vessel.nextDeparture}</p>
+    nextDeparture = <p className="font-semibold">Scheduled departure at {vessel.nextDeparture}</p>;
   }
 
   return (
@@ -17,5 +17,5 @@ export default function Docked({ vessel }) {
         </>
       )}
     </>
-  )
+  );
 }

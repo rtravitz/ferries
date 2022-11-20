@@ -1,1 +1,1 @@
-export { default } from './VesselView'
+export { default } from './VesselView';

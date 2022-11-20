@@ -15,13 +15,13 @@ module.exports = {
           'transparent-600': 'rgba(75, 85, 99, 0.4)',
         },
         blue: {
-          'secondary': '#44A5DE',
+          secondary: '#44A5DE',
         },
         green: {
-          'dark': '#384B42',
-          'light': '#9AB0A6',
-          'brand': '#047857',
-        }
+          dark: '#384B42',
+          light: '#9AB0A6',
+          brand: '#047857',
+        },
       },
       animation: {
         'spin-once': 'spin 1s',
@@ -29,4 +29,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+};

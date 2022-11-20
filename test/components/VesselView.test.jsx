@@ -1,8 +1,8 @@
-import React from 'react'
-import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
-import VesselView from '../../src/components/VesselView'
-import Vessel from '../../src/models/Vessel'
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import VesselView from '../../src/components/VesselView';
+import Vessel from '../../src/models/Vessel';
 
 describe('VesselView', () => {
   const defaultMovingVessel = {
@@ -24,7 +24,7 @@ describe('VesselView', () => {
     lon: -122.850553,
     speed: 15.1,
     headtxt: 'SExS',
-  }
+  };
 
   const defaultStoppedVessel = {
     inservice: 'True',
@@ -44,99 +44,99 @@ describe('VesselView', () => {
     lon: -123.013825,
     speed: 0.0,
     headtxt: 'Stopped',
-  }
+  };
 
   describe('all vessels', () => {
     it('shows the current speed', () => {
-      const vessel = new Vessel(defaultMovingVessel)
-      render(<VesselView vessel={vessel} />)
+      const vessel = new Vessel(defaultMovingVessel);
+      render(<VesselView vessel={vessel} />);
 
-      expect(screen.getByText('15.1')).toBeInTheDocument()
-    })
+      expect(screen.getByText('15.1')).toBeInTheDocument();
+    });
 
     it('shows the heading', () => {
-      const vessel = new Vessel(defaultMovingVessel)
-      render(<VesselView vessel={vessel} />)
+      const vessel = new Vessel(defaultMovingVessel);
+      render(<VesselView vessel={vessel} />);
 
-      expect(screen.getByText('SExS')).toBeInTheDocument()
-    })
+      expect(screen.getByText('SExS')).toBeInTheDocument();
+    });
 
     it('gives a link to the appropriate WSDOT vessel page', () => {
-      const vessel = new Vessel(defaultMovingVessel)
-      render(<VesselView vessel={vessel} />)
+      const vessel = new Vessel(defaultMovingVessel);
+      render(<VesselView vessel={vessel} />);
 
       expect(screen.getByText('Boat Notes').closest('a')).toHaveAttribute(
         'href',
         'https://wsdot.wa.gov/ferries/vesselwatch/VesselDetail.aspx?vessel_id=38',
-      )
-    })
-  })
+      );
+    });
+  });
 
   describe('a docked vessel', () => {
-    const dockedVessel = { ...defaultStoppedVessel }
+    const dockedVessel = { ...defaultStoppedVessel };
 
     it('shows the next departure time if one exists', () => {
-      const vessel = new Vessel(dockedVessel)
-      render(<VesselView vessel={vessel} />)
+      const vessel = new Vessel(dockedVessel);
+      render(<VesselView vessel={vessel} />);
 
-      expect(screen.getByText('Scheduled departure at 4:30 PM')).toBeInTheDocument()
-    })
+      expect(screen.getByText('Scheduled departure at 4:30 PM')).toBeInTheDocument();
+    });
 
     it('shows the next dock if one exists', () => {
-      const vessel = new Vessel(dockedVessel)
-      render(<VesselView vessel={vessel} />)
+      const vessel = new Vessel(dockedVessel);
+      render(<VesselView vessel={vessel} />);
 
-      expect(screen.getByText('Anacortes')).toBeInTheDocument()
-    })
+      expect(screen.getByText('Anacortes')).toBeInTheDocument();
+    });
 
     it('states that the vessel is docked at a specific port', () => {
-      const vessel = new Vessel(dockedVessel)
-      render(<VesselView vessel={vessel} />)
+      const vessel = new Vessel(dockedVessel);
+      render(<VesselView vessel={vessel} />);
 
-      expect(screen.getByText('Docked at Friday Harbor')).toBeInTheDocument()
-    })
-  })
+      expect(screen.getByText('Docked at Friday Harbor')).toBeInTheDocument();
+    });
+  });
 
   describe('an underway vessel', () => {
-    const underwayVessel = { ...defaultMovingVessel }
+    const underwayVessel = { ...defaultMovingVessel };
 
     it('shows the last dock', () => {
-      const vessel = new Vessel(underwayVessel)
-      render(<VesselView vessel={vessel} />)
+      const vessel = new Vessel(underwayVessel);
+      render(<VesselView vessel={vessel} />);
 
-      expect(screen.getByText('Lopez Island')).toBeInTheDocument()
-    })
+      expect(screen.getByText('Lopez Island')).toBeInTheDocument();
+    });
 
     it('shows the time the vessel left the dock', () => {
-      const vessel = new Vessel(underwayVessel)
-      render(<VesselView vessel={vessel} />)
+      const vessel = new Vessel(underwayVessel);
+      render(<VesselView vessel={vessel} />);
 
-      expect(screen.getByText('4:20 PM')).toBeInTheDocument()
-    })
+      expect(screen.getByText('4:20 PM')).toBeInTheDocument();
+    });
 
     it('shows the destination dock', () => {
-      const vessel = new Vessel(underwayVessel)
-      render(<VesselView vessel={vessel} />)
+      const vessel = new Vessel(underwayVessel);
+      render(<VesselView vessel={vessel} />);
 
-      expect(screen.getByText('Anacortes')).toBeInTheDocument()
-    })
+      expect(screen.getByText('Anacortes')).toBeInTheDocument();
+    });
 
     it('shows the estimated time of arrival at the next dock', () => {
-      const vessel = new Vessel(underwayVessel)
-      render(<VesselView vessel={vessel} />)
+      const vessel = new Vessel(underwayVessel);
+      render(<VesselView vessel={vessel} />);
 
-      expect(screen.getByText('5:04 PM')).toBeInTheDocument()
-    })
-  })
+      expect(screen.getByText('5:04 PM')).toBeInTheDocument();
+    });
+  });
 
   describe('an out of service vessel', () => {
-    const outOfServiceVessel = { ...defaultStoppedVessel, inservice: 'False' }
+    const outOfServiceVessel = { ...defaultStoppedVessel, inservice: 'False' };
 
     it('shows that the vessel is out of service', () => {
-      const vessel = new Vessel(outOfServiceVessel)
-      render(<VesselView vessel={vessel} />)
+      const vessel = new Vessel(outOfServiceVessel);
+      render(<VesselView vessel={vessel} />);
 
-      expect(screen.getByText('Out of service and docked at Friday Harbor')).toBeInTheDocument()
-    })
-  })
-})
+      expect(screen.getByText('Out of service and docked at Friday Harbor')).toBeInTheDocument();
+    });
+  });
+});
