@@ -7,7 +7,6 @@ import { setupServer } from 'msw/node';
 import App from '../../src/components/App';
 import vesselsFixture from '../../src/mocks/fixtures/vessels.json';
 import { defer } from '../utils';
-import { LOADING_SCREEN_UNMOUNT_DURATION } from '../../src/constants';
 
 describe('App', () => {
   const server = setupServer(
@@ -50,6 +49,9 @@ describe('App', () => {
 
   it('hides out of service vessels by default', async () => {
     render(<App />);
+
+    // first wait to make sure that the icons are loaded
+    await screen.findByAltText('good ferry icon');
 
     const outOfServiceIcon = screen.queryByAltText('out of service ferry icon');
 
@@ -94,7 +96,7 @@ describe('App', () => {
     // There is a extra delay before unmounting to give the animation time to complete.
     // The timeout here is that value, plus a bit. No flapping tests allowed!
     await waitForElementToBeRemoved(() => screen.getByTestId(testId), {
-      timeout: LOADING_SCREEN_UNMOUNT_DURATION + 100,
+      timeout: process.env.VITE_LOADING_SCREEN_DURATION + 10,
     });
   });
 
@@ -119,7 +121,7 @@ describe('App', () => {
     serverResponse.resolve();
 
     await waitForElementToBeRemoved(() => screen.getByTestId(testId), {
-      timeout: LOADING_SCREEN_UNMOUNT_DURATION + 100,
+      timeout: process.env.VITE_LOADING_SCREEN_DURATION + 10,
     });
   });
 });

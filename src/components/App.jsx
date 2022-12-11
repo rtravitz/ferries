@@ -11,15 +11,15 @@ import SlidingBottomPane from './SlidingBottomPane';
 import { useStickyState, useDelayUnmount } from '../hooks';
 import { LoadingScreen } from './LoadingScreen';
 import locationDot from '../assets/location-dot.svg';
-import { LOADING_SCREEN_UNMOUNT_DURATION } from '../constants';
 
 const BACKEND = import.meta.env.VITE_BACKEND;
+const LOADING_SCREEN_DURATION = parseInt(import.meta.env.VITE_LOADING_SCREEN_DURATION, 10);
 
 export default function App() {
   const [vessels, setVessels] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
   const [firstLoadComplete, setFirstLoadComplete] = useState(false);
-  const shouldRenderLoadingScreen = useDelayUnmount(!firstLoadComplete, LOADING_SCREEN_UNMOUNT_DURATION);
+  const shouldRenderLoadingScreen = useDelayUnmount(!firstLoadComplete, LOADING_SCREEN_DURATION);
   const [activePane, setActivePane] = useState(null);
   const [fetchErr, setFetchErr] = useState(false);
   const [showOutOfService, setShowOutOfService] = useStickyState(false, 'showOutOfService');
