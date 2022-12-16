@@ -1,14 +1,16 @@
 import { STATUS_GOOD, STATUS_DELAYED, STATUS_OUT_OF_SERVICE } from '../constants';
 
+const CALCULATING = 'Calculating';
+
 export default class Vessel {
   constructor(v) {
     this.id = v.vesselID;
     this.name = v.name;
     this.inService = v.inservice;
     this.lastDock = v.lastdock;
-    this.leftDock = `${v.leftdock} ${v.leftdockAMPM}`;
+    this.leftDock = `${v.leftdock} ${v.leftdockAMPM}`.trim();
     this.nextDock = v.aterm;
-    this.eta = `${v.eta} ${v.etaAMPM}`;
+    this.eta = `${v.eta} ${v.etaAMPM}`.trim();
     this.etaReason = v.etaBasis;
     this.departDelayed = v.departDelayed;
     this.nextDeparture = `${v.nextdep} ${v.nextdepAMPM}`;
@@ -40,5 +42,17 @@ export default class Vessel {
     }
 
     return STATUS_OUT_OF_SERVICE;
+  }
+
+  hasEta() {
+    return this.eta.length && this.eta !== CALCULATING;
+  }
+
+  hasDeparted() {
+    return this.leftDock.length > 0;
+  }
+
+  hasNextDock() {
+    return this.nextDock.length > 0;
   }
 }

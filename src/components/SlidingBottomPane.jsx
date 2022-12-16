@@ -18,6 +18,7 @@ function SlidingBottomPane({ activePane, setActivePane }) {
           toRender={item.component}
           header={item.header}
           headerColor={item.headerColor}
+          dockHeader={item.dockHeader}
           transitionStyles={styles}
         />
       )

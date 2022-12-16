@@ -1,0 +1,179 @@
+[
+  {
+    "name": "Anacortes",
+    "lat": 48.50681694038778,
+    "lon": -122.67837404775968,
+    "connections": [
+      "Lopez Island",
+      "Shaw Island",
+      "Orcas Island",
+      "Friday Harbor"
+    ]
+  },
+  {
+    "name": "Bainbridge Island",
+    "lat": 47.62331222405166,
+    "lon": -122.5108661139202,
+    "connections": [
+      "Seattle"
+    ]
+  },
+  {
+    "name": "Bremerton",
+    "lat": 47.56288034458581,
+    "lon": -122.62604884996303,
+    "connections": [
+      "Seattle"
+    ]
+  },
+  {
+    "name": "Clinton",
+    "lat": 47.975203175650314,
+    "lon": -122.3500055440728,
+    "connections": [
+      "Mukilteo"
+    ]
+  },
+  {
+    "name": "Coupeville",
+    "lat": 48.15992604907056,
+    "lon": -122.67288721249038,
+    "connections": [
+      "Port Townsend"
+    ]
+  },
+  {
+    "name": "Edmonds",
+    "lat": 47.81307456376723,
+    "lon": -122.38383956630831,
+    "connections": [
+      "Kingston"
+    ]
+  },
+  {
+    "name": "Fauntleroy",
+    "lat": 47.52339702261122,
+    "lon": -122.3960071235264,
+    "connections": [
+      "Vashon Island",
+      "Southworth"
+    ]
+  },
+  {
+    "name": "Friday Harbor",
+    "lat": 48.5354368342497,
+    "lon": -123.01433325569292,
+    "connections": [
+      "Anacortes",
+      "Lopez Island",
+      "Shaw Island",
+      "Orcas Island"
+    ]
+  },
+  {
+    "name": "Kingston",
+    "lat": 47.796504357644466,
+    "lon": -122.4949331125879,
+    "connections": [
+      "Edmonds"
+    ]
+  },
+  {
+    "name": "Lopez Island",
+    "lat": 48.57052036880537,
+    "lon": -122.8831559329373,
+    "connections": [
+      "Anacortes",
+      "Shaw Island",
+      "Orcas Island",
+      "Friday Harbor"
+    ]
+  },
+  {
+    "name": "Mukilteo",
+    "lat": 47.95033875374361,
+    "lon": -122.29667064830265,
+    "connections": [
+      "Clinton"
+    ]
+  },
+  {
+    "name": "Orcas Island",
+    "lat": 48.59805180842269,
+    "lon": -122.94349120039543,
+    "connections": [
+      "Anacortes",
+      "Lopez Island",
+      "Shaw Island",
+      "Friday Harbor"
+    ]
+  },
+  {
+    "name": "Point Defiance",
+    "lat": 47.306158279691445,
+    "lon": -122.51368353112775,
+    "connections": [
+      "Tahlequah"
+    ]
+  },
+  {
+    "name": "Port Townsend",
+    "lat": 48.11227789302081,
+    "lon": -122.76050897290416,
+    "connections": [
+      "Coupeville"
+    ]
+  },
+  {
+    "name": "Seattle",
+    "lat": 47.602803565590264,
+    "lon": -122.33817069567577,
+    "connections": [
+      "Bainbridge Island",
+      "Bremerton"
+    ]
+  },
+  {
+    "name": "Shaw Island",
+    "lat": 48.58443637965092,
+    "lon": -122.9291244519863,
+    "connections": [
+      "Anacortes",
+      "Lopez Island",
+      "Orcas Island",
+      "Friday Harbor"
+    ]
+  },
+  {
+    "name": "Sidney B.C.",
+    "lat": 48.64400928053612,
+    "lon": -123.39761939987059,
+    "connections": []
+  },
+  {
+    "name": "Southworth",
+    "lat": 47.512773410034484,
+    "lon": -122.49560526366193,
+    "connections": [
+      "Fauntleroy",
+      "Vashon Island"
+    ]
+  },
+  {
+    "name": "Tahlequah",
+    "lat": 47.33224907921072,
+    "lon": -122.50731107901223,
+    "connections": [
+      "Point Defiance"
+    ]
+  },
+  {
+    "name": "Vashon Island",
+    "lat": 47.50845383017415,
+    "lon": -122.46408228456384,
+    "connections": [
+      "Fauntleroy",
+      "Southworth"
+    ]
+  }
+]

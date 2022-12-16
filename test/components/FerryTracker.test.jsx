@@ -4,11 +4,11 @@ import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/extend-expect';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import App from '../../src/components/App';
-import vesselsFixture from '../../src/mocks/fixtures/vessels.json';
+import { FerryTracker } from '../../src/components/FerryTracker';
+import vesselsFixture from '../../src/mocks/fixtures/test-vessels.json';
 import { defer } from '../utils';
 
-describe('App', () => {
+describe('FerryTracker', () => {
   const server = setupServer(
     rest.get('http://localhost:5273/api/vessels', (req, res, ctx) => {
       return res(ctx.json(vesselsFixture));
@@ -20,7 +20,7 @@ describe('App', () => {
   afterAll(() => server.close());
 
   it('shows ferry icons when vessels are retrieved successfully', async () => {
-    render(<App />);
+    render(<FerryTracker />);
 
     await screen.findAllByAltText('good ferry icon');
   });
@@ -32,13 +32,13 @@ describe('App', () => {
       }),
     );
 
-    render(<App />);
+    render(<FerryTracker />);
 
     await screen.findByText('There was an error fetching updated vessel information.');
   });
 
   it('displays information about a ferry when it is selected', async () => {
-    render(<App />);
+    render(<FerryTracker />);
 
     const icon = await screen.findByAltText('good ferry icon');
 
@@ -48,7 +48,7 @@ describe('App', () => {
   });
 
   it('hides out of service vessels by default', async () => {
-    render(<App />);
+    render(<FerryTracker />);
 
     // first wait to make sure that the icons are loaded
     await screen.findByAltText('good ferry icon');
@@ -59,7 +59,7 @@ describe('App', () => {
   });
 
   it('shows out of service vessels after toggling', async () => {
-    render(<App />);
+    render(<FerryTracker />);
 
     const settingsIcon = await screen.findByAltText('cog icon');
     userEvent.click(settingsIcon);
@@ -81,7 +81,7 @@ describe('App', () => {
       }),
     );
 
-    render(<App />);
+    render(<FerryTracker />);
 
     const loadingScreen = await screen.findByTestId(testId);
 
@@ -111,7 +111,7 @@ describe('App', () => {
       }),
     );
 
-    render(<App />);
+    render(<FerryTracker />);
 
     const loadingScreen = await screen.findByTestId(testId);
 

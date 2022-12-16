@@ -16,6 +16,7 @@ module.exports = {
         },
         blue: {
           secondary: '#44A5DE',
+          'transparent-200': 'rgba(191, 219, 254, 0.9)',
         },
         green: {
           dark: '#384B42',
