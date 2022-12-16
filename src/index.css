@@ -21,6 +21,15 @@
   border-top: 20px solid #017359;
 }
 
+.arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+
+  border-left: 15px solid #017359;
+}
+
 .alert-enter {
   @apply opacity-0 transform scale-90;
 }

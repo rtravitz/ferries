@@ -1,0 +1,179 @@
+{
+  "feedname": "Ferry VesselWatch",
+  "appurl": "//www.wsdot.com/ferries/vesselwatch",
+  "legenditemlist": [],
+  "timestamp": "1/24/2021 11:07:41 PM",
+  "vessellist": [
+    {
+      "id": 0,
+      "inservice": "True",
+      "system": "WSF",
+      "mmsi": 367649320,
+      "vesselID": 69,
+      "name": "Samish",
+      "route": "ANA-SJ",
+      "lastdock": "Anacortes",
+      "lastdock_id": "1",
+      "lastdock_abbrev": "ANA",
+      "aterm": "",
+      "aterm_id": "",
+      "aterm_abbrev": "",
+      "eta": "Calculating",
+      "etaAMPM": "",
+      "leftdock": "",
+      "departDelayed": "",
+      "leftdockAMPM": "",
+      "etaBasis": "",
+      "nextdep": "",
+      "nextdepAMPM": "",
+      "lastlat": 0,
+      "lastlon": 0,
+      "lat": 48.5074,
+      "lon": -122.676895,
+      "speed": 0,
+      "head": 208,
+      "headtxt": "Stopped",
+      "datetime": "1/24   23:07",
+      "old": 0,
+      "icon": "../images/VesselWatch/boats/main/trimmed/Stopped.png",
+      "h": 13,
+      "w": 13,
+      "xOffSet": 0,
+      "yOffSet": 0,
+      "pos": "1",
+      "label": {
+        "icon": "../images/VesselWatch/labels/trimmed/367649320-Stopped.png",
+        "h": 13,
+        "w": 23,
+        "xOffSet": 0,
+        "yOffSet": -13,
+        "place": 1
+      },
+      "vesselwatch": {
+        "shutoff": {
+          "shutid": 18,
+          "shutmsg": " Vessel is out of service for remainder of the day.",
+          "shutflag": 0
+        },
+        "status": {
+          "watchstatus": 0,
+          "watchmsg": "WSF's VesselWatch page is currently not responding and is out of service. Thank you for your patience while we work to restore this page.  "
+        }
+      }
+    },
+    {
+      "id": 1,
+      "inservice": "True",
+      "system": "WSF",
+      "mmsi": 366709770,
+      "vesselID": 2,
+      "name": "Chelan",
+      "route": "ANA-SJ",
+      "lastdock": "Orcas Island",
+      "lastdock_id": "15",
+      "lastdock_abbrev": "ORI",
+      "aterm": "Shaw Island",
+      "aterm_id": "18",
+      "aterm_abbrev": "SHI",
+      "eta": "11:07",
+      "etaAMPM": "PM",
+      "leftdock": "10:46",
+      "departDelayed": "Y",
+      "leftdockAMPM": "PM",
+      "etaBasis": "Vessel Chelan departed Orcas going to Shaw and using vessel Chelan closest location data from Jan 24 2021  6:29PM",
+      "nextdep": "10:40",
+      "nextdepAMPM": "PM",
+      "lastlat": 0,
+      "lastlon": 0,
+      "lat": 48.571332,
+      "lon": -122.882537,
+      "speed": 1.8,
+      "head": 211,
+      "headtxt": "SWxS",
+      "datetime": "1/24   23:07",
+      "old": 0,
+      "icon": "../images/VesselWatch/boats/main/trimmed/lightgreen1_210.png",
+      "h": 20,
+      "w": 15,
+      "xOffSet": 0,
+      "yOffSet": 0,
+      "pos": "2",
+      "label": {
+        "icon": "../images/VesselWatch/labels/trimmed/366709770.png",
+        "h": 13,
+        "w": 23,
+        "xOffSet": 0,
+        "yOffSet": -17,
+        "place": 0
+      },
+      "vesselwatch": {
+        "shutoff": {
+          "shutid": 2,
+          "shutmsg": "Vessel data temporarily unavailable.",
+          "shutflag": 0
+        },
+        "status": {
+          "watchstatus": 0,
+          "watchmsg": "WSF's VesselWatch page is currently not responding and is out of service. Thank you for your patience while we work to restore this page.  "
+        }
+      }
+    },
+    {
+      "id": 17,
+      "inservice": "False",
+      "system": "WSF",
+      "mmsi": 366773040,
+      "vesselID": 15,
+      "name": "Issaquah",
+      "route": "",
+      "lastdock": "Eagle Harbor",
+      "lastdock_id": "122",
+      "lastdock_abbrev": "EAH",
+      "aterm": "",
+      "aterm_id": "",
+      "aterm_abbrev": "",
+      "eta": "",
+      "etaAMPM": "",
+      "leftdock": "",
+      "departDelayed": "",
+      "leftdockAMPM": "",
+      "etaBasis": "",
+      "nextdep": "",
+      "nextdepAMPM": "",
+      "lastlat": 0,
+      "lastlon": 0,
+      "lat": 47.620462,
+      "lon": -122.513555,
+      "speed": 0.1,
+      "head": 289,
+      "headtxt": "Stopped",
+      "datetime": "1/12   23:43",
+      "old": 1,
+      "icon": "../images/VesselWatch/boats/main/faded/trimmed/Stopped.png",
+      "h": 13,
+      "w": 13,
+      "xOffSet": 0,
+      "yOffSet": 0,
+      "pos": "1",
+      "label": {
+        "icon": "../images/VesselWatch/labels/faded/trimmed/366773040-Stopped.png",
+        "h": 13,
+        "w": 19,
+        "xOffSet": 0,
+        "yOffSet": -13,
+        "place": 1
+      },
+      "vesselwatch": {
+        "shutoff": {
+          "shutid": 12,
+          "shutmsg": "Vessel Watch data temporarily unavailable.",
+          "shutflag": 0
+        },
+        "status": {
+          "watchstatus": 0,
+          "watchmsg": "WSF's VesselWatch page is currently not responding and is out of service. Thank you for your patience while we work to restore this page.  "
+        }
+      }
+    }
+  ]
+}

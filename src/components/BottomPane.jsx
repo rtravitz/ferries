@@ -3,8 +3,10 @@ import useMeasure from 'react-use-measure';
 import { useDrag } from '@use-gesture/react';
 import { a, useSpring, config } from '@react-spring/web';
 
-export default function BottomPane({ header, headerColor, toRender, setActivePane, transitionStyles }) {
+export default function BottomPane({ header, headerColor, toRender, setActivePane, transitionStyles, dockHeader }) {
   const color = headerColor || 'bg-ferry-green';
+  const paneRounded = dockHeader ? '' : 'md:rounded-lg';
+
   const [ref, { height }] = useMeasure();
   const [{ y }, api] = useSpring(() => ({ y: height }));
 
@@ -40,16 +42,27 @@ export default function BottomPane({ header, headerColor, toRender, setActivePan
     },
   );
 
+  const ferryPaneHeader = <>
+    <div className={`${color} bg-center bg-contain bg-no-repeat h-20 flex flew-row justify-center items-center`}>
+      <h1 className={`font-sans font-bold text-xl text-gray-200 mt-6 text-center`}>{header}</h1>
+    </div>
+  </>
+
+  const terminalPaneHeader = <>
+    <div className={`bg-green-brand py-2 md:rounded-t-lg flex flew-row justify-center items-center`}>
+      <h1 className={`font-sans font-bold text-xl text-gray-200 text-center`}>{header}</h1>
+    </div>
+  </>;
+
+  const toShowPane = dockHeader ? terminalPaneHeader : ferryPaneHeader;
+
   return (
     <a.section
       className="fixed -bottom-20 z-max w-full md:max-w-md md:inset-x-0 md:mx-auto"
-      style={{ ...transitionStyles }}
-    >
+      style={{ ...transitionStyles }}>
       <a.div ref={ref} {...bind()} style={{ y, touchAction: 'none' }}>
-        <div className={`${color} bg-center bg-contain bg-no-repeat h-20 flex flew-row justify-center items-center`}>
-          <h1 className="font-sans font-bold text-xl text-gray-200 mt-6 text-center">{header}</h1>
-        </div>
-        <div className="md:rounded-lg overflow-hidden">{toRender}</div>
+        { toShowPane }
+        <div className={`${paneRounded} overflow-hidden`}>{toRender}</div>
         <div className="h-20 bg-gray-transparent-200" />
       </a.div>
     </a.section>
