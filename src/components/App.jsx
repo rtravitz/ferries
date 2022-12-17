@@ -154,8 +154,8 @@ export default function App() {
           userLocation={userLocation}
           setSettings={setSettings}
         />
-        <SlidingBottomPane activePane={activePane} setActivePane={setActivePane} />
       </MapContainer>
+      <SlidingBottomPane activePane={activePane} setActivePane={setActivePane} />
     </section>
   );
 }
