@@ -33,6 +33,8 @@ export function TerminalVesselCard({ direction, vessel }) {
         {isIncoming && <h4 className={dockFont}>{vessel.lastDock}</h4>}
         <h3 className="text-lg font-semibold">{vessel.leftDock}</h3>
       </>
+    } else if (!vessel.hasNextDock()) {
+      departureSide = <p className="text-sm font-light">Docked</p>;
     }
 
     if (vessel.hasEta()) {
@@ -75,7 +77,7 @@ export function TerminalVesselCard({ direction, vessel }) {
       className="bg-slate-100 rounded-lg shadow cursor-pointer">
       <div className={`${headerColor} rounded-t-lg flex justify-between items-center py-1 px-2`}>
         <h3 className="font-bold text-gray-200 text-lg">{vessel.name}</h3>
-        {vessel.isInService() && directionTag}
+        {vessel.isInService() && vessel.hasNextDock() && directionTag}
       </div>
       <div className="mb-4 px-2 py-2 flex items-center justify-center">
         <div className="flex flex-col justify-center items-center text-center">
