@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import fetch from 'node-fetch';
 
 process.env.VITE_BACKEND = 'http://localhost:5273/api/vessels';
-process.env.VITE_LOADING_SCREEN_DURATION= 1;
+process.env.VITE_LOADING_SCREEN_DURATION = 1;
 
 const noop = () => {};
 Object.defineProperty(window, 'scrollTo', { value: noop, writable: true });

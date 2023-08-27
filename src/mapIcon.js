@@ -34,9 +34,7 @@ export function makeVesselIcon(status, selected) {
 }
 
 export function makeTerminalIcon(selected) {
-  const classes = selected
-    ? 'shadow-md transition-height duration-500'
-    : 'shadow-none transition-height duration-500';
+  const classes = selected ? 'shadow-md transition-height duration-500' : 'shadow-none transition-height duration-500';
   const width = selected ? 35 : 25;
   const height = selected ? 35 : 25;
 
@@ -45,5 +43,5 @@ export function makeTerminalIcon(selected) {
     iconUrl: dockIcon,
     iconRetinaUrl: dockIcon,
     iconSize: new L.Point(width, height),
-  })
+  });
 }

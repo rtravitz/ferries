@@ -75,18 +75,19 @@ export function ActivePaneWrapper() {
   };
 
   return (
-    <ActivePaneContext.Provider value={{
-      activePane,
-      setActivePane,
-      setVessel,
-      setTerminal,
-      setInfo,
-      setSettings,
-      showOutOfService,
-      map,
-    }}>
+    <ActivePaneContext.Provider
+      value={{
+        activePane,
+        setActivePane,
+        setVessel,
+        setTerminal,
+        setInfo,
+        setSettings,
+        showOutOfService,
+        map,
+      }}
+    >
       <Map setMap={setMap} />
     </ActivePaneContext.Provider>
-  )
-
+  );
 }

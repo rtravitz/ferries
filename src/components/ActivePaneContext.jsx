@@ -10,4 +10,3 @@ export const ActivePaneContext = createContext({
   setInfo: () => {},
   setSettings: () => {},
 });
-

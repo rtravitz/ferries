@@ -6,9 +6,9 @@ import { Marker } from 'react-leaflet';
 export function VesselMapIcons({ vessels }) {
   const { activePane, setVessel, showOutOfService } = useContext(ActivePaneContext);
 
-  return <>
-    {
-      vessels
+  return (
+    <>
+      {vessels
         .filter((v) => {
           if (!showOutOfService && !v.isInService()) {
             return false;
@@ -30,8 +30,7 @@ export function VesselMapIcons({ vessels }) {
               eventHandlers={{ mousedown: setVessel(v) }}
             />
           );
-        })
-    }
-  </>
+        })}
+    </>
+  );
 }
-

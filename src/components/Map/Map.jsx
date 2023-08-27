@@ -59,19 +59,14 @@ export function Map({ setMap }) {
         Mobile Safari was spawning multiple click events with Leaflet, making it difficult to
         select a marker. Setting tap={false} solves, this: https://github.com/Leaflet/Leaflet/issues/7255
        */}
-      <MapContainer 
-        ref={setMap}
-        zoomControl={false} 
-        center={[47.96533, -122.659685]} 
-        zoom={9} 
-        tap={false}>
+      <MapContainer ref={setMap} zoomControl={false} center={[47.96533, -122.659685]} zoom={9} tap={false}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
         <VesselMapIcons vessels={vessels} />
         <TerminalMapIcons terminals={terminals} vessels={vessels} />
-        { userLocation && <UserLocationIcon userLocation={userLocation} /> }
+        {userLocation && <UserLocationIcon userLocation={userLocation} />}
         <FixedControls
           refreshVessels={refreshVessels}
           setInfo={setInfo}

@@ -42,26 +42,31 @@ export default function BottomPane({ header, headerColor, toRender, setActivePan
     },
   );
 
-  const ferryPaneHeader = <>
-    <div className={`${color} bg-center bg-contain bg-no-repeat h-20 flex flew-row justify-center items-center`}>
-      <h1 className={`font-sans font-bold text-xl text-gray-200 mt-6 text-center`}>{header}</h1>
-    </div>
-  </>
+  const ferryPaneHeader = (
+    <>
+      <div className={`${color} bg-center bg-contain bg-no-repeat h-20 flex flew-row justify-center items-center`}>
+        <h1 className={`font-sans font-bold text-xl text-gray-200 mt-6 text-center`}>{header}</h1>
+      </div>
+    </>
+  );
 
-  const terminalPaneHeader = <>
-    <div className={`bg-green-brand py-2 md:rounded-t-lg flex flew-row justify-center items-center`}>
-      <h1 className={`font-sans font-bold text-xl text-gray-200 text-center`}>{header}</h1>
-    </div>
-  </>;
+  const terminalPaneHeader = (
+    <>
+      <div className={`bg-green-brand py-2 md:rounded-t-lg flex flew-row justify-center items-center`}>
+        <h1 className={`font-sans font-bold text-xl text-gray-200 text-center`}>{header}</h1>
+      </div>
+    </>
+  );
 
   const toShowPane = dockHeader ? terminalPaneHeader : ferryPaneHeader;
 
   return (
     <a.section
       className="fixed -bottom-20 z-max w-full md:max-w-md md:inset-x-0 md:mx-auto"
-      style={{ ...transitionStyles }}>
+      style={{ ...transitionStyles }}
+    >
       <a.div ref={ref} {...bind()} style={{ y, touchAction: 'none' }}>
-        { toShowPane }
+        {toShowPane}
         <div className={`${paneRounded} overflow-hidden`}>{toRender}</div>
         <div className="h-20 bg-gray-transparent-200" />
       </a.div>
