@@ -19,7 +19,12 @@ export function TerminalVesselCard({ direction, vessel }) {
       <p className="text-sm font-light">Docked and out of service</p>
     </div>
   } else {
-    if (vessel.hasNextDeparture()) {
+    if (vessel.hasDeparted()) {
+      departureSide = <>
+        <h4 className={dockFont}>{vessel.lastDock}</h4>
+        <h3 className="text-lg font-semibold">{vessel.leftDock}</h3>
+      </>
+    } else if (vessel.hasNextDeparture()) {
       departureSide = <>
         {isIncoming && <h4 className={dockFont}>Currently at {vessel.lastDock}</h4>}
         <div className="flex justify-center items-center flex-col">
@@ -27,20 +32,13 @@ export function TerminalVesselCard({ direction, vessel }) {
           <p className="text-lg font-semibold">{vessel.nextDeparture}</p>
         </div>
       </>
-    } else if (vessel.hasDeparted()) {
-      departureSide = <>
-        {isOutgoing && <p className="text-sm font-light">Departed</p>}
-        {isIncoming && <h4 className={dockFont}>{vessel.lastDock}</h4>}
-        <h3 className="text-lg font-semibold">{vessel.leftDock}</h3>
-      </>
     } else if (!vessel.hasNextDock()) {
       departureSide = <p className="text-sm font-light">Docked</p>;
     }
 
     if (vessel.hasEta()) {
       arrivalSide = <div className="flex flex-col justify-center items-center">
-        {isOutgoing && <h4 className={dockFont}>{vessel.nextDock}</h4>}
-        {isIncoming && <p className="text-sm font-light">Estimated Arrival</p>}
+        <h4 className={dockFont}>{vessel.nextDock}</h4>
         {vessel.hasEta() && <h3 className="text-lg font-semibold">{vessel.eta}</h3>}
       </div>
     } else if (vessel.hasNextDock() && isOutgoing) {
