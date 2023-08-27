@@ -7,7 +7,7 @@ export default class Vessel {
     this.id = v.vesselID;
     this.name = v.name;
     this.inService = v.inservice;
-    this.lastDock = v.lastdock;
+    this.lastDock = v.lastdock ? v.lastdock.trim() : '';
     this.leftDock = `${v.leftdock} ${v.leftdockAMPM}`.trim();
     this.nextDock = v.aterm;
     this.eta = `${v.eta} ${v.etaAMPM}`.trim();

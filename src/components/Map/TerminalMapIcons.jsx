@@ -4,17 +4,19 @@ import { Marker } from 'react-leaflet';
 import { makeTerminalIcon } from '../../mapIcon';
 
 export function TerminalMapIcons({ terminals, vessels }) {
-  const { activePane, setTerminal } = useContext(ActivePaneContext);
+  const { activePane, setTerminal, showOutOfService } = useContext(ActivePaneContext);
 
   return <>
     {
       terminals.map((t) => {
         const relevantVessels = vessels.reduce((sorted, v) => {
-          if (v.lastDock === t.name) {
-            sorted.outgoing.push(v);
-          }
-          if (v.nextDock === t.name) {
-            sorted.incoming.push(v);
+          if (showOutOfService || v.isInService()) {
+            if (v.lastDock === t.name) {
+              sorted.outgoing.push(v);
+            }
+            if (v.nextDock === t.name) {
+              sorted.incoming.push(v);
+            }
           }
           return sorted;
         }, { incoming: [], outgoing: [] });
