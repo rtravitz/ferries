@@ -6,11 +6,12 @@ import InfoPane from './InfoView';
 import SettingsPane from './SettingsView';
 import { TerminalPane } from './TerminalPane/TerminalPane';
 import { useStickyState } from '../hooks';
+import { defaultShowDocks, defaultShowOutOfService } from '../settings';
 
 export function ActivePaneWrapper() {
   const [activePane, setActivePane] = useState(null);
-  const [showOutOfService, setShowOutOfService] = useStickyState(false, 'showOutOfService');
-  const [showDocks, setShowDocks] = useStickyState(false, 'showDocks');
+  const [showOutOfService, setShowOutOfService] = useStickyState(defaultShowOutOfService, 'showOutOfService');
+  const [showDocks, setShowDocks] = useStickyState(defaultShowDocks, 'showDocks');
   const [map, setMap] = useState(null);
 
   const setVessel = (vessel) => {
