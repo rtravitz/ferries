@@ -4,7 +4,10 @@ import { Marker } from 'react-leaflet';
 import { makeTerminalIcon } from '../../mapIcon';
 
 export function TerminalMapIcons({ terminals, vessels }) {
-  const { activePane, setTerminal, showOutOfService } = useContext(ActivePaneContext);
+  const { activePane, setTerminal, showOutOfService, showDocks } = useContext(ActivePaneContext);
+  if (!showDocks) {
+    return null;
+  }
 
   return (
     <>

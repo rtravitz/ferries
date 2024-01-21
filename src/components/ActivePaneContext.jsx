@@ -4,6 +4,7 @@ export const ActivePaneContext = createContext({
   activePane: null,
   map: null,
   showOutOfService: false,
+  showDocks: false,
   setActivePane: () => {},
   setVessel: () => {},
   setTerminal: () => {},

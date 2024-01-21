@@ -10,6 +10,7 @@ import { useStickyState } from '../hooks';
 export function ActivePaneWrapper() {
   const [activePane, setActivePane] = useState(null);
   const [showOutOfService, setShowOutOfService] = useStickyState(false, 'showOutOfService');
+  const [showDocks, setShowDocks] = useStickyState(false, 'showDocks');
   const [map, setMap] = useState(null);
 
   const setVessel = (vessel) => {
@@ -68,7 +69,11 @@ export function ActivePaneWrapper() {
       setActivePane(null);
     } else {
       setActivePane({
-        component: <SettingsPane showOutOfService={showOutOfService} setShowOutOfService={setShowOutOfService} />,
+        component: <SettingsPane 
+          showOutOfService={showOutOfService}
+          setShowOutOfService={setShowOutOfService} 
+          showDocks={showDocks}
+          setShowDocks={setShowDocks} />,
         header: SETTINGS,
       });
     }
@@ -84,6 +89,7 @@ export function ActivePaneWrapper() {
         setInfo,
         setSettings,
         showOutOfService,
+        showDocks,
         map,
       }}
     >
