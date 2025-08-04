@@ -4,16 +4,19 @@ import './index.css';
 import { worker } from './mocks/browser';
 import { FerryTracker } from './components/FerryTracker';
 
-if (process.env.NODE_ENV === 'development') {
-  worker.start({
-    onUnhandledRequest: 'bypass',
-  });
+async function enableMocking() {
+  if (process.env.NODE_ENV === 'development') {
+    await worker.start({
+      onUnhandledRequest: 'bypass',
+    });
+  }
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-
-root.render(
-  <React.StrictMode>
-    <FerryTracker />
-  </React.StrictMode>,
-);
+enableMocking().then(() => {
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(
+    <React.StrictMode>
+      <FerryTracker />
+    </React.StrictMode>,
+  );
+});
