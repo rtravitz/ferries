@@ -1,17 +1,17 @@
 import L from 'leaflet';
-import { STATUS_OUT_OF_SERVICE, STATUS_DELAYED } from './constants';
 import delayed from './assets/ferry-token-delayed.svg';
 import outOfService from './assets/ferry-token-out-of-service.svg';
 import good from './assets/ferry-token-good.svg';
 import dockIcon from './assets/dock.svg';
+import { VesselStatus } from './models/Vessel';
 
-export function makeVesselIcon(status, selected) {
+export function makeVesselIcon(status: VesselStatus, selected: boolean) {
   let icon = good;
   let alt = 'good ferry icon';
-  if (status === STATUS_OUT_OF_SERVICE) {
+  if (status === VesselStatus.OutOfService) {
     alt = 'out of service ferry icon';
     icon = outOfService;
-  } else if (status === STATUS_DELAYED) {
+  } else if (status === VesselStatus.Delayed) {
     alt = 'delayed ferry icon';
     icon = delayed;
   }
@@ -33,7 +33,7 @@ export function makeVesselIcon(status, selected) {
   };
 }
 
-export function makeTerminalIcon(selected) {
+export function makeTerminalIcon(selected: boolean) {
   const classes = selected ? 'shadow-md transition-height duration-500' : 'shadow-none transition-height duration-500';
   const width = selected ? 35 : 25;
   const height = selected ? 35 : 25;

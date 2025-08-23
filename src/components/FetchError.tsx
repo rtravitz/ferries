@@ -1,8 +1,11 @@
-import React from 'react';
 import exclamation from '../assets/exclamation-outline.svg';
 import { useTransition, config, a } from '@react-spring/web';
 
-export default function FetchError({ active }) {
+interface FetchErrProps {
+  active: boolean;
+}
+
+export default function FetchError({ active }: FetchErrProps) {
   const transition = useTransition(active, {
     from: { opacity: 0, y: -30 },
     enter: { opacity: 1, y: 0 },

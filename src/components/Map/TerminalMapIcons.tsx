@@ -2,8 +2,16 @@ import { useContext } from 'react';
 import { ActivePaneContext } from '../ActivePaneContext';
 import { Marker } from 'react-leaflet';
 import { makeTerminalIcon } from '../../mapIcon';
+import type { Terminal, TerminalVessels } from '../../models/Terminal';
+import type Vessel from '../../models/Vessel';
+import { ActivePaneType } from '../ActivePaneWrapper';
 
-export function TerminalMapIcons({ terminals, vessels }) {
+interface TerminalMapIconsProps {
+  terminals: Array<Terminal>;
+  vessels: Array<Vessel>;
+}
+
+export function TerminalMapIcons({ terminals, vessels }: TerminalMapIconsProps) {
   const { activePane, setTerminal, showOutOfService, showDocks } = useContext(ActivePaneContext);
   if (!showDocks) {
     return null;
@@ -13,7 +21,7 @@ export function TerminalMapIcons({ terminals, vessels }) {
     <>
       {terminals.map((t) => {
         const relevantVessels = vessels.reduce(
-          (sorted, v) => {
+          (sorted: TerminalVessels, v: Vessel) => {
             if (showOutOfService || v.isInService()) {
               if (v.lastDock === t.name) {
                 sorted.outgoing.push(v);
@@ -27,7 +35,7 @@ export function TerminalMapIcons({ terminals, vessels }) {
           { incoming: [], outgoing: [] },
         );
 
-        const isSelected = activePane && activePane.terminalId === t.name;
+        const isSelected = activePane !== null && activePane.type === ActivePaneType.Terminal && activePane.terminalId === t.name;
 
         return (
           <Marker

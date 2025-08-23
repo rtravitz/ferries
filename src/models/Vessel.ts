@@ -1,9 +1,48 @@
-import { STATUS_GOOD, STATUS_DELAYED, STATUS_OUT_OF_SERVICE } from '../constants';
-
 const CALCULATING = 'Calculating';
 
+export enum VesselStatus {
+  Good,
+  Delayed,
+  OutOfService,
+}
+
+export interface ApiVessel {
+  vesselID: number;
+  name: string;
+  inservice: string;
+  lastdock: string;
+  leftdock: string;
+  leftdockAMPM: string;
+  aterm: string;
+  eta: string;
+  etaAMPM: string;
+  etaBasis: string;
+  departDelayed: string;
+  nextdep: string;
+  nextdepAMPM: string;
+  lat: number;
+  lon: number;
+  speed: number;
+  headtxt: string;
+}
+
 export default class Vessel {
-  constructor(v) {
+  public readonly id: number;
+  public readonly name: string;
+  public readonly lastDock: string;
+  public readonly etaReason: string;
+  public readonly lat: number;
+  public readonly lon: number;
+  public readonly speed: number;
+  public readonly nextDock: string;
+  public readonly headingText: string;
+  public readonly leftDock: string;
+  public readonly eta: string;
+  public readonly nextDeparture: string;
+  private inService: string;
+  private departDelayed: string;
+
+  constructor(v: ApiVessel) {
     this.id = v.vesselID;
     this.name = v.name;
     this.inService = v.inservice;
@@ -38,10 +77,10 @@ export default class Vessel {
 
   status() {
     if (this.isInService()) {
-      return this.isDelayed() ? STATUS_DELAYED : STATUS_GOOD;
+      return this.isDelayed() ? VesselStatus.Delayed : VesselStatus.Good;
     }
 
-    return STATUS_OUT_OF_SERVICE;
+    return VesselStatus.OutOfService;
   }
 
   hasEta() {
