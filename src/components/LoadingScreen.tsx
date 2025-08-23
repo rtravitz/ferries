@@ -1,7 +1,10 @@
-import React from 'react';
 import ferry from '../assets/ferry-token-good.svg';
 
-export function LoadingScreen({ firstLoadComplete }) {
+interface LoadingScreenProps {
+  firstLoadComplete: boolean;
+}
+
+export function LoadingScreen({ firstLoadComplete }: LoadingScreenProps) {
   return (
     <div
       data-testid="loading-screen"

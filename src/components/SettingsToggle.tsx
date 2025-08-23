@@ -1,6 +1,11 @@
-import React from 'react';
+interface SettingsToggleProps {
+  id: string;
+  label: string;
+  action: () => void;
+  status: boolean;
+}
 
-export function SettingsToggle({ id, status, action, label }) {
+export function SettingsToggle({ id, status, action, label }: SettingsToggleProps) {
   return (
     <label htmlFor={id} className="flex items-center cursor-pointer my-2">
       <div className="relative">

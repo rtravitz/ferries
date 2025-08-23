@@ -2,8 +2,14 @@ import { useContext } from 'react';
 import { makeVesselIcon } from '../../mapIcon';
 import { ActivePaneContext } from '../ActivePaneContext';
 import { Marker } from 'react-leaflet';
+import type Vessel from '../../models/Vessel';
+import { ActivePaneType } from '../ActivePaneWrapper';
 
-export function VesselMapIcons({ vessels }) {
+interface VesselMapIconsProps {
+  vessels: Array<Vessel>
+}
+
+export function VesselMapIcons({ vessels }: VesselMapIconsProps) {
   const { activePane, setVessel, showOutOfService } = useContext(ActivePaneContext);
 
   return (
@@ -17,7 +23,7 @@ export function VesselMapIcons({ vessels }) {
           return true;
         })
         .map((v) => {
-          const isSelected = activePane && activePane.vesselID === v.id;
+          const isSelected = activePane !== null && activePane.type === ActivePaneType.Vessel && activePane.vesselID === v.id;
           const { icon, alt } = makeVesselIcon(v.status(), isSelected);
 
           return (

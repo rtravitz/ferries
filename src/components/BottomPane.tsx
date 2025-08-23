@@ -1,16 +1,25 @@
-import React from 'react';
 import useMeasure from 'react-use-measure';
 import { useDrag } from '@use-gesture/react';
-import { a, useSpring, config } from '@react-spring/web';
+import { a, useSpring, config, SpringValue } from '@react-spring/web';
+import type { ActivePane } from './ActivePaneWrapper';
 
-export default function BottomPane({ header, headerColor, toRender, setActivePane, transitionStyles, dockHeader }) {
+interface BottomPaneProps {
+  header: string;
+  setActivePane: React.Dispatch<React.SetStateAction<ActivePane>>
+  headerColor?: string;
+  dockHeader?: boolean;
+  toRender: React.ReactElement;
+  transitionStyles: { y: SpringValue<number> };
+}
+
+export default function BottomPane({ header, headerColor, toRender, setActivePane, transitionStyles, dockHeader }: BottomPaneProps) {
   const color = headerColor || 'bg-ferry-green';
   const paneRounded = dockHeader ? '' : 'md:rounded-lg';
 
   const [ref, { height }] = useMeasure();
   const [{ y }, api] = useSpring(() => ({ y: height }));
 
-  const open = ({ canceled }) => {
+  const open = ({ canceled }: { canceled: boolean }) => {
     api.start({ y: 0, immediate: false, config: canceled ? config.wobbly : config.stiff });
   };
   const close = (velocity = 0) => {

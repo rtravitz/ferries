@@ -1,19 +1,25 @@
-import React from 'react';
 import { TerminalVesselCard } from './TerminalVesselCard';
+import type { TerminalVessels } from '../../models/Terminal';
 
-export const INCOMING = 'Incoming';
-export const OUTGOING = 'Outgoing';
+export enum TerminalVesselDirection {
+  Incoming,
+  Outgoing,
+}
 
-export function TerminalPane({ vessels }) {
+interface TerminalPaneProps {
+  vessels: TerminalVessels;
+}
+
+export function TerminalPane({ vessels }: TerminalPaneProps) {
   const hasVessels = vessels.incoming.length || vessels.outgoing.length;
 
   const toRender = hasVessels ? (
     <ul>
       {vessels.incoming.map((vessel) => (
-        <TerminalVesselCard key={vessel.id} direction={INCOMING} vessel={vessel} />
+        <TerminalVesselCard key={vessel.id} direction={TerminalVesselDirection.Incoming} vessel={vessel} />
       ))}
       {vessels.outgoing.map((vessel) => (
-        <TerminalVesselCard key={vessel.id} direction={OUTGOING} vessel={vessel} />
+        <TerminalVesselCard key={vessel.id} direction={TerminalVesselDirection.Outgoing} vessel={vessel} />
       ))}
     </ul>
   ) : (

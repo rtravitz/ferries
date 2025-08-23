@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function InfoPane() {
   return (
     <div className="bg-gray-transparent-200 text-lg p-4 pb-8">

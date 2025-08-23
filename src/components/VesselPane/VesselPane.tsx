@@ -1,12 +1,16 @@
-import React from 'react';
 import Underway from './Underway';
 import OutOfService from './OutOfService';
 import Docked from './Docked';
 
 import compass from '../../assets/compass.svg';
 import speedometer from '../../assets/speedometer.svg';
+import type Vessel from '../../models/Vessel';
 
-export default function VesselView({ vessel }) {
+interface VesselViewProps {
+  vessel: Vessel;
+}
+
+export default function VesselView({ vessel }: VesselViewProps) {
   let leftBlock;
   if (vessel.isInService()) {
     if (vessel.isStopped()) {

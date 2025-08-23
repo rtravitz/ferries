@@ -1,6 +1,10 @@
-import React from 'react';
+import type Vessel from "../../models/Vessel";
 
-export default function Underway({ vessel }) {
+interface UnderwayProps {
+  vessel: Vessel;
+}
+
+export default function Underway({ vessel }: UnderwayProps) {
   return (
     <>
       <h3 className="text-xl font-light">{vessel.lastDock}</h3>

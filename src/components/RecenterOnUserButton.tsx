@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useMap } from 'react-leaflet/hooks';
 import { useMapEvent } from 'react-leaflet/hooks';
+import type { UserLocation } from './Map/UserLocationIcon';
 
-export function RecenterOnUserButton({ userLocation }) {
+interface RecenterOnUserButtonProps {
+  userLocation: UserLocation;
+}
+
+export function RecenterOnUserButton({ userLocation }: RecenterOnUserButtonProps) {
   const [centered, setCentered] = useState(true);
 
   const map = useMap();

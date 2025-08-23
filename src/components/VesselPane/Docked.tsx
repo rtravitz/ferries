@@ -1,6 +1,10 @@
-import React from 'react';
+import type Vessel from "../../models/Vessel";
 
-export default function Docked({ vessel }) {
+interface DockedProps {
+  vessel: Vessel;
+}
+
+export default function Docked({ vessel }: DockedProps) {
   let nextDeparture = null;
   if (vessel.hasNextDeparture()) {
     nextDeparture = <p className="font-semibold">Scheduled departure at {vessel.nextDeparture}</p>;

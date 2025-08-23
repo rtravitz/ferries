@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
-export function useStickyState(defaultValue, key) {
-  const [value, setValue] = useState(() => {
+export function useStickyState<T>(defaultValue: T, key: string): [T, React.Dispatch<React.SetStateAction<T>>] {
+  const [value, setValue] = useState<T>(() => {
     const stickyValue = window.localStorage.getItem(key);
     return stickyValue !== null ? JSON.parse(stickyValue) : defaultValue;
   });
@@ -11,11 +11,11 @@ export function useStickyState(defaultValue, key) {
   return [value, setValue];
 }
 
-export function useDelayUnmount(isMounted, delayTime) {
+export function useDelayUnmount(isMounted: boolean, delayTime: number) {
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
-    let timeoutId;
+    let timeoutId: NodeJS.Timeout;
     if (isMounted && !shouldRender) {
       setShouldRender(true);
     } else if (!isMounted && shouldRender) {
@@ -27,8 +27,8 @@ export function useDelayUnmount(isMounted, delayTime) {
   return shouldRender;
 }
 
-export function usePrevious(value) {
-  const ref = useRef();
+export function usePrevious<T>(value: T) {
+  const ref = useRef<T>(value);
   useEffect(() => {
     ref.current = value;
   }, [value]);

@@ -4,8 +4,17 @@ import { RecenterOnUserButton } from './RecenterOnUserButton';
 import refresh from '../assets/refresh.svg';
 import info from '../assets/information-outline.svg';
 import cog from '../assets/cog.svg';
+import type { UserLocation } from './Map/UserLocationIcon';
 
-export default function FixedControls({ refreshVessels, setInfo, setSettings, setUserLocation, userLocation }) {
+interface FixedControlsProps {
+  refreshVessels: () => void;
+  setInfo: () => void;
+  setSettings: () => void;
+  setUserLocation: React.Dispatch<React.SetStateAction<UserLocation | null>>;
+  userLocation: UserLocation | null;
+}
+
+export default function FixedControls({ refreshVessels, setInfo, setSettings, setUserLocation, userLocation }: FixedControlsProps) {
   const [spinning, setSpinning] = useState('');
 
   return (

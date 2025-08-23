@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useMap } from 'react-leaflet/hooks';
 import { usePrevious } from '../hooks';
+import type { UserLocation } from './Map/UserLocationIcon';
 
-export function FindLocationButton({ userLocation, setUserLocation }) {
-  const [watchId, setWatchId] = useState(null);
+interface FindLocationButtonProps {
+  userLocation: UserLocation | null;
+  setUserLocation: React.Dispatch<React.SetStateAction<UserLocation | null>>;
+}
+
+export function FindLocationButton({ userLocation, setUserLocation }: FindLocationButtonProps) {
+  const [watchId, setWatchId] = useState<number | null>(null);
 
   const map = useMap();
   const prevLocation = usePrevious(userLocation);
@@ -26,11 +32,11 @@ export function FindLocationButton({ userLocation, setUserLocation }) {
     };
   }, [watchId]);
 
-  const success = (pos) => {
+  const success: PositionCallback = (pos) => {
     setUserLocation(pos.coords);
   };
 
-  const error = (err) => {
+  const error: PositionErrorCallback = (err) => {
     console.warn(`failed getting location: ${err.code}: ${err.message}`);
   };
 
@@ -41,9 +47,11 @@ export function FindLocationButton({ userLocation, setUserLocation }) {
   };
 
   const endLocationWatch = () => {
-    navigator.geolocation.clearWatch(watchId);
-    setWatchId(null);
-    setUserLocation(null);
+    if (watchId !== null) {
+      navigator.geolocation.clearWatch(watchId);
+      setWatchId(null);
+      setUserLocation(null);
+    }
   };
 
   const handleClick = () => {

@@ -1,11 +1,17 @@
 import { useContext } from 'react';
 import { ActivePaneContext } from '../ActivePaneContext';
-import { INCOMING, OUTGOING } from './TerminalPane';
+import { TerminalVesselDirection } from './TerminalPane';
+import type Vessel from '../../models/Vessel';
 
-export function TerminalVesselCard({ direction, vessel }) {
+interface TerminalVesselCardProps {
+  direction: TerminalVesselDirection;
+  vessel: Vessel;
+}
+
+export function TerminalVesselCard({ direction, vessel }: TerminalVesselCardProps) {
   const { setVessel, map } = useContext(ActivePaneContext);
-  const isIncoming = direction === INCOMING;
-  const isOutgoing = direction === OUTGOING;
+  const isIncoming = direction === TerminalVesselDirection.Incoming;
+  const isOutgoing = direction === TerminalVesselDirection.Outgoing;
   const dockFont = 'text-sm font-light';
 
   let departureSide = null;
@@ -69,10 +75,12 @@ export function TerminalVesselCard({ direction, vessel }) {
   const hasBothSides = departureSide !== null && arrivalSide !== null;
 
   const onClick = () => {
-    setVessel(vessel)();
-    const iconAlreadyVisible = map.getBounds().contains([vessel.lat, vessel.lon]);
-    if (!iconAlreadyVisible) {
-      map.flyTo([vessel.lat, vessel.lon], 12);
+    setVessel(vessel);
+    if (map) {
+      const iconAlreadyVisible = map.getBounds().contains([vessel.lat, vessel.lon]);
+      if (!iconAlreadyVisible) {
+        map.flyTo([vessel.lat, vessel.lon], 12);
+      }
     }
   };
 
