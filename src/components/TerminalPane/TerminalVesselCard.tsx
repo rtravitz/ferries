@@ -73,9 +73,10 @@ export function TerminalVesselCard({ direction, vessel }: TerminalVesselCardProp
   }
 
   const hasBothSides = departureSide !== null && arrivalSide !== null;
+  const setThisVesselAsActive = setVessel(vessel);
 
   const onClick = () => {
-    setVessel(vessel);
+    setThisVesselAsActive();
     if (map) {
       const iconAlreadyVisible = map.getBounds().contains([vessel.lat, vessel.lon]);
       if (!iconAlreadyVisible) {
