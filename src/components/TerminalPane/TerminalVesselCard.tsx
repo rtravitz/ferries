@@ -59,15 +59,18 @@ export function TerminalVesselCard({ direction, vessel }: TerminalVesselCardProp
     }
 
     let directionTagColor;
+    let directionText;
     if (isIncoming) {
       directionTagColor = 'bg-green-100';
+      directionText = 'Inbound'
     } else if (isOutgoing) {
       directionTagColor = 'bg-blue-100';
+      directionText = 'Outbound'
     }
 
     directionTag = (
       <div className={`${directionTagColor} rounded-lg py-0.5 px-1`}>
-        <h5 className="text-slate-800 text-sm">{direction}</h5>
+        <h5 className="text-slate-800 text-sm">{directionText}</h5>
       </div>
     );
   }
