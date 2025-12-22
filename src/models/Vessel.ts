@@ -24,6 +24,7 @@ export interface ApiVessel {
   lon: number;
   speed: number;
   headtxt: string;
+  head: number;
 }
 
 export default class Vessel {
@@ -39,6 +40,7 @@ export default class Vessel {
   public readonly leftDock: string;
   public readonly eta: string;
   public readonly nextDeparture: string;
+  public readonly heading: number;
   private inService: string;
   private departDelayed: string;
 
@@ -57,6 +59,7 @@ export default class Vessel {
     this.lon = v.lon;
     this.speed = v.speed;
     this.headingText = v.headtxt;
+    this.heading = v.head;
   }
 
   isInService() {

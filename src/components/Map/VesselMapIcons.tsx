@@ -15,16 +15,10 @@ export function VesselMapIcons({ vessels }: VesselMapIconsProps) {
   return (
     <>
       {vessels
-        .filter((v) => {
-          if (!showOutOfService && !v.isInService()) {
-            return false;
-          }
-
-          return true;
-        })
+        .filter((v) => v.isInService() || showOutOfService)
         .map((v) => {
           const isSelected = activePane !== null && activePane.type === ActivePaneType.Vessel && activePane.vesselID === v.id;
-          const { icon, alt } = makeVesselIcon(v.status(), isSelected);
+          const { icon, alt } = makeVesselIcon(v, isSelected);
 
           return (
             <Marker

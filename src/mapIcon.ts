@@ -1,34 +1,56 @@
-import L from 'leaflet';
-import delayed from './assets/ferry-token-delayed.svg';
-import outOfService from './assets/ferry-token-out-of-service.svg';
-import good from './assets/ferry-token-good.svg';
+import L, { DivIcon } from 'leaflet';
 import dockIcon from './assets/dock.svg';
-import { VesselStatus } from './models/Vessel';
+import Vessel, { VesselStatus } from './models/Vessel';
 
-export function makeVesselIcon(status: VesselStatus, selected: boolean) {
-  let icon = good;
-  let alt = 'good ferry icon';
-  if (status === VesselStatus.OutOfService) {
-    alt = 'out of service ferry icon';
-    icon = outOfService;
-  } else if (status === VesselStatus.Delayed) {
-    alt = 'delayed ferry icon';
-    icon = delayed;
+function generateVesselSvg(v: Vessel): string {
+  const color = getVesselIconColor(v.status());
+
+  // Only show the direction arrow if the boat isn't 
+  // showing as stopped and has some speed.
+  const directionArrow =
+    v.speed && v.speed > 0 && !v.isStopped() ?
+      `<g transform="rotate(${v.heading})" transform-origin="center">
+    <path d="M426.82454816833376,238.17466157685595 C426.82454816833297,238.17466157685737 312.9354698392405,130.87539643887425 312.9354698392405,130.87539643887425 C312.9354698392405,130.87539643887425 205.9145966842894,244.46898526651432 205.9145966842894,244.46898526651432 C238.93265500610602,219.73395236747092 278.413307397909,205.34042703899274 320.80725286810906,205.3404270392302 C359.4660289570422,205.34042704288083 395.70225529661695,217.3093674177463 426.82454816833376,238.17466157685595 Z" transform="matrix(1.223593853,0,0,1.07178772,-42.53778264,-126.856778012)" fill="${color}" stroke="#e5e6ea" stroke-width="10" />
+  </g>` : '';
+
+  return `
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700">
+    ${directionArrow}
+    <g transform="matrix(5.397543493,0,0,5.397543493,-4835.027540149,-2562.380791045)">
+      <path d="M951.9987816764132,518.831234068076 C951.9987816764132,518.831234068076 937.1237816764132,518.831234068076 937.1237816764132,518.831234068076 C937.1237816764132,518.831234068076 937.1237816764132,527.7412339154881 937.1237816764132,527.7412339154881 C937.1237816764132,527.7412339154881 933.7437825156466,527.7412339154881 933.7437825156466,527.7412339154881 C933.7437825156466,527.7412339154881 933.7437825156466,540.7412339154881 933.7437825156466,540.7412339154881 C933.7437825156466,540.7412339154881 918.2877817107454,540.7412339154881 918.2877817107454,540.7412339154881 C918.2877817107454,540.7412339154881 930.1577820731417,560.3192330304784 930.1577820731417,560.3192330304784 C930.1577820731417,560.3192330304784 991.1507821036593,560.3192330304784 991.1507821036593,560.3192330304784 C991.1507821036593,560.3192330304784 1002.9667839957491,540.7402344648045 1002.9667839957491,540.7402344648045 C1002.9667839957491,540.7402344648045 987.5037789298311,540.7402344648045 987.5037789298311,540.7402344648045 C987.5037789298311,540.7402344648045 987.5037789298311,527.7402344648045 987.5037789298311,527.7402344648045 C987.5037789298311,527.7402344648045 983.9987816764132,527.7402344648045 983.9987816764132,527.7402344648045 C983.9987816764132,527.7402344648045 983.9987816764132,518.831234068076 983.9987816764132,518.831234068076 C983.9987816764132,518.831234068076 969.1237816764132,518.831234068076 969.1237816764132,518.831234068076 C969.1237816764132,518.831234068076 969.1237816764132,527.7412339154881 969.1237816764132,527.7412339154881 C969.1237816764132,527.7412339154881 951.9987816764132,527.7412339154881 951.9987816764132,527.7412339154881 C951.9987816764132,527.7412339154881 951.9987816764132,518.831234068076 951.9987816764132,518.831234068076 C951.9987816764132,518.831234068076 951.9987816764132,518.831234068076 951.9987816764132,518.831234068076 Z" fill="${color}" stroke="#e5e6ea" stroke-width="3" />
+    </g>
+  </svg>
+`
+}
+
+function getVesselIconColor(status: VesselStatus): string {
+  switch (status) {
+    case VesselStatus.Good: {
+      return '#047857';
+    }
+    case VesselStatus.Delayed: {
+      return '#B45309';
+    }
+    case VesselStatus.OutOfService: {
+      return '#B91C1C';
+    }
   }
+}
+
+export function makeVesselIcon(vessel: Vessel, selected: boolean) {
+  const width = selected ? 50 : 40;
+  const height = selected ? 50 : 40;
 
   const classes = selected
-    ? 'bg-blue-secondary border-solid border border-gray-200 rounded-full shadow-md transition-height duration-500'
-    : 'bg-transparent border-none shadow-none transition-height duration-500';
-  const width = selected ? 40 : 30;
-  const height = selected ? 40 : 30;
+    ? 'bg-blue-secondary border-solid border border-gray-200 rounded-full shadow-md transition-height duration-500 custom-arrow-rotation'
+    : 'bg-transparent border-none shadow-none transition-height duration-500 custom-arrow-rotation';
 
   return {
-    alt,
-    icon: new L.Icon({
-      className: classes,
-      iconUrl: icon,
-      iconRetinaUrl: icon,
+    alt: vessel.name,
+    icon: new DivIcon({
+      html: generateVesselSvg(vessel),
       iconSize: new L.Point(width, height),
+      className: classes,
     }),
   };
 }
