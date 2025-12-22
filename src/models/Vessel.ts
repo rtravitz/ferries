@@ -50,7 +50,7 @@ export default class Vessel {
     this.inService = v.inservice;
     this.lastDock = v.lastdock ? v.lastdock.trim() : '';
     this.leftDock = `${v.leftdock} ${v.leftdockAMPM}`.trim();
-    this.nextDock = v.aterm;
+    this.nextDock = v.aterm ? v.aterm.trim() : '';
     this.eta = `${v.eta} ${v.etaAMPM}`.trim();
     this.etaReason = v.etaBasis;
     this.departDelayed = v.departDelayed;
