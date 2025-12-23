@@ -1,24 +1,30 @@
-import { useState } from 'react';
-import { useMap } from 'react-leaflet/hooks';
-import { useMapEvent } from 'react-leaflet/hooks';
+import { useEffect, useState } from 'react';
 import type { UserLocation } from './Map/UserLocationIcon';
+import type { Map as LeafletMap } from 'leaflet';
 
 interface RecenterOnUserButtonProps {
   userLocation: UserLocation;
+  map: LeafletMap | null;
 }
 
-export function RecenterOnUserButton({ userLocation }: RecenterOnUserButtonProps) {
+export function RecenterOnUserButton({ userLocation, map }: RecenterOnUserButtonProps) {
   const [centered, setCentered] = useState(true);
 
-  const map = useMap();
+  useEffect(() => {
+    const invalidateCentering = () => { setCentered(false) };
 
-  useMapEvent('movestart', () => {
-    setCentered(false);
-  });
+    if (map) {
+      map.addEventListener('movestart', invalidateCentering);
+    }
+
+    return () => { map?.removeEventListener('movestart', invalidateCentering) }
+  }, [map, setCentered])
 
   const recenterOnUser = () => {
-    map.flyTo([userLocation.latitude, userLocation.longitude], 15);
-    setCentered(true);
+    if (map) {
+      map.flyTo([userLocation.latitude, userLocation.longitude], 15);
+      setCentered(true);
+    }
   };
 
   if (centered) {

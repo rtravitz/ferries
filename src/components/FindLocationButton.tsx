@@ -1,23 +1,23 @@
 import { useState, useEffect } from 'react';
-import { useMap } from 'react-leaflet/hooks';
 import { usePrevious } from '../hooks';
 import type { UserLocation } from './Map/UserLocationIcon';
+import type { Map as LeafletMap } from 'leaflet';
 
 interface FindLocationButtonProps {
   userLocation: UserLocation | null;
   setUserLocation: React.Dispatch<React.SetStateAction<UserLocation | null>>;
+  map: LeafletMap | null;
 }
 
-export function FindLocationButton({ userLocation, setUserLocation }: FindLocationButtonProps) {
+export function FindLocationButton({ userLocation, setUserLocation, map }: FindLocationButtonProps) {
   const [watchId, setWatchId] = useState<number | null>(null);
 
-  const map = useMap();
   const prevLocation = usePrevious(userLocation);
 
   // Only fly to the user's location if it's the first time that they're activating location tracking.
   // There's a separate button that handles recentering for preexisting tracking sessions.
   useEffect(() => {
-    if (!prevLocation && userLocation) {
+    if (!prevLocation && userLocation && map) {
       map.flyTo([userLocation.latitude, userLocation.longitude], 15);
     }
   }, [userLocation]);

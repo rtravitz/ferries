@@ -71,7 +71,7 @@ export default function BottomPane({ header, headerColor, toRender, setActivePan
 
   return (
     <a.section
-      className="fixed -bottom-20 z-max w-full md:max-w-md md:inset-x-0 md:mx-auto"
+      className="fixed -bottom-20 z-[900] w-full md:max-w-md md:inset-x-0 md:mx-auto"
       style={{ ...transitionStyles }}
     >
       <a.div ref={ref} {...bind()} style={{ y, touchAction: 'none' }}>

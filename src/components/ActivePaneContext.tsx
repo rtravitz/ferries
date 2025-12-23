@@ -2,7 +2,7 @@ import { createContext } from 'react';
 import { type ActivePane } from './ActivePaneWrapper';
 import Vessel from '../models/Vessel';
 import type { Map } from 'leaflet';
-import type { Terminal, TerminalVessels } from '../models/Terminal';
+import type { Terminal } from '../models/Terminal';
 
 interface ActivePaneContextFields {
   activePane: ActivePane
@@ -11,7 +11,7 @@ interface ActivePaneContextFields {
   showDocks: boolean;
   setActivePane: React.Dispatch<React.SetStateAction<ActivePane>>;
   setVessel: (vessel: Vessel) => () => void;
-  setTerminal: (terminal: Terminal, vessels: TerminalVessels) => () => void;
+  setTerminal: (terminal: Terminal, vessels: Array<Vessel>) => () => void;
   setInfo: () => void;
   setSettings: () => void;
 }

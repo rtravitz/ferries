@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useLayoutEffect, RefObject } from 'react';
 
 export function useStickyState<T>(defaultValue: T, key: string): [T, React.Dispatch<React.SetStateAction<T>>] {
   const [value, setValue] = useState<T>(() => {
@@ -34,3 +34,38 @@ export function usePrevious<T>(value: T) {
   }, [value]);
   return ref.current;
 }
+
+export const useOnClickOutside = <T extends HTMLElement | null>(
+  element: RefObject<T>,
+  handler: () => void,
+  attached = true,
+): void => {
+  const latestHandler = useRef(handler);
+
+  useLayoutEffect(() => {
+    latestHandler.current = handler;
+  }, [handler]);
+
+  useEffect(() => {
+    if (!attached || !element || !element.current) {
+      return;
+    }
+
+    const handleClick = (e: Event) => {
+      if (
+        latestHandler &&
+        element.current &&
+        !element.current.contains(e.target as Node)
+      ) {
+        latestHandler.current();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClick);
+    };
+
+  }, [element, attached]);
+};

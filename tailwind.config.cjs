@@ -14,8 +14,12 @@ module.exports = {
           'transparent-300': 'rgba(209, 213, 219, 0.9)',
           'transparent-600': 'rgba(75, 85, 99, 0.4)',
         },
+        slate: {
+          'transparent-100': 'rgba(241, 245, 249, 0.9)',
+        },
         blue: {
           secondary: '#44A5DE',
+          dock: '#3B82F6',
           'transparent-200': 'rgba(191, 219, 254, 0.9)',
         },
         green: {

@@ -5,6 +5,9 @@ import refresh from '../assets/refresh.svg';
 import info from '../assets/information-outline.svg';
 import cog from '../assets/cog.svg';
 import type { UserLocation } from './Map/UserLocationIcon';
+import { TerminalSearch } from './TerminalSearch';
+import Vessel from '../models/Vessel';
+import type { Map as LeafletMap } from 'leaflet';
 
 interface FixedControlsProps {
   refreshVessels: () => void;
@@ -12,42 +15,47 @@ interface FixedControlsProps {
   setSettings: () => void;
   setUserLocation: React.Dispatch<React.SetStateAction<UserLocation | null>>;
   userLocation: UserLocation | null;
+  vessels: Array<Vessel>;
+  map: LeafletMap | null;
 }
 
-export default function FixedControls({ refreshVessels, setInfo, setSettings, setUserLocation, userLocation }: FixedControlsProps) {
+export default function FixedControls(props: FixedControlsProps) {
   const [spinning, setSpinning] = useState('');
 
   return (
-    <div className="fixed top-4 right-2 flex flex-col z-max items-center">
-      <button
-        title="Refresh vessel data"
-        onClick={() => {
-          refreshVessels();
-          setSpinning('animate-spin-once');
-        }}
-        onAnimationEnd={() => {
-          setSpinning('');
-        }}
-        className="bg-green-brand active:bg-green-900 rounded-full h-16 w-16 p-2 shadow-lg select-none"
-      >
-        <img className={spinning} src={refresh} alt="refresh arrow" />
-      </button>
-      <button
-        title="Toggle info pane"
-        onClick={setInfo}
-        className="bg-green-brand active:bg-green-900 rounded-full h-10 w-10 p-2 mt-4 shadow-lg select-none"
-      >
-        <img className="" src={info} alt="info icon" />
-      </button>
-      <button
-        title="Toggle settings pane"
-        onClick={setSettings}
-        className="bg-green-brand active:bg-green-900 rounded-full h-10 w-10 p-2 mt-4 shadow-lg select-none"
-      >
-        <img className="" src={cog} alt="cog icon" />
-      </button>
-      <FindLocationButton userLocation={userLocation} setUserLocation={setUserLocation} />
-      {userLocation && <RecenterOnUserButton userLocation={userLocation} />}
-    </div>
+    <>
+      <TerminalSearch vessels={props.vessels} map={props.map} />
+      <div className="fixed top-4 right-2 flex flex-col z-[801] items-center">
+        <button
+          title="Refresh vessel data"
+          onClick={() => {
+            props.refreshVessels();
+            setSpinning('animate-spin-once');
+          }}
+          onAnimationEnd={() => {
+            setSpinning('');
+          }}
+          className="bg-green-brand active:bg-green-900 rounded-full h-16 w-16 p-2 shadow-lg select-none"
+        >
+          <img className={spinning} src={refresh} alt="refresh arrow" />
+        </button>
+        <button
+          title="Toggle info pane"
+          onClick={props.setInfo}
+          className="bg-green-brand active:bg-green-900 rounded-full h-10 w-10 p-2 mt-4 shadow-lg select-none"
+        >
+          <img className="" src={info} alt="info icon" />
+        </button>
+        <button
+          title="Toggle settings pane"
+          onClick={props.setSettings}
+          className="bg-green-brand active:bg-green-900 rounded-full h-10 w-10 p-2 mt-4 shadow-lg select-none"
+        >
+          <img className="" src={cog} alt="cog icon" />
+        </button>
+        <FindLocationButton userLocation={props.userLocation} setUserLocation={props.setUserLocation} map={props.map} />
+        {props.userLocation && <RecenterOnUserButton userLocation={props.userLocation} map={props.map} />}
+      </div>
+    </>
   );
 }

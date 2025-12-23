@@ -19,9 +19,10 @@ const LOADING_SCREEN_DURATION = parseInt(import.meta.env.VITE_LOADING_SCREEN_DUR
 
 interface MapProps {
   setMap: (instance: LeafletMap | null) => void;
+  map: LeafletMap | null;
 }
 
-export function Map({ setMap }: MapProps) {
+export function Map({ setMap, map }: MapProps) {
   const [vessels, setVessels] = useState([]);
   const [userLocation, setUserLocation] = useState<UserLocation | null>(null);
   const [firstLoadComplete, setFirstLoadComplete] = useState(false);
@@ -65,22 +66,26 @@ export function Map({ setMap }: MapProps) {
         Mobile Safari was spawning multiple click events with Leaflet, making it difficult to
         select a marker. Setting tap={false} solves, this: https://github.com/Leaflet/Leaflet/issues/7255
        */}
-      <MapContainer ref={setMap} zoomControl={false} center={[47.96533, -122.659685]} zoom={9}>
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        />
+      <MapContainer 
+        ref={setMap} 
+        attributionControl={false}
+        zoomControl={false} 
+        center={[47.96533, -122.659685]} 
+        zoom={9}>
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <VesselMapIcons vessels={vessels} />
         <TerminalMapIcons terminals={terminals} vessels={vessels} />
         {userLocation && <UserLocationIcon userLocation={userLocation} />}
-        <FixedControls
-          refreshVessels={refreshVessels}
-          setInfo={setInfo}
-          setUserLocation={setUserLocation}
-          userLocation={userLocation}
-          setSettings={setSettings}
-        />
       </MapContainer>
+      <FixedControls
+        refreshVessels={refreshVessels}
+        setInfo={setInfo}
+        setUserLocation={setUserLocation}
+        userLocation={userLocation}
+        setSettings={setSettings}
+        vessels={vessels}
+        map={map}
+      />
       <SlidingBottomPane activePane={activePane} setActivePane={setActivePane} />
     </section>
   );
