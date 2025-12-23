@@ -18,7 +18,7 @@
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
 
-  border-top: 20px solid #017359;
+  border-top: 20px solid rgb(4, 120, 87);
 }
 
 .arrow-right {
@@ -27,7 +27,7 @@
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
 
-  border-left: 15px solid #017359;
+  border-left: 15px solid rgb(4, 120, 87);
 }
 
 .alert-enter {
