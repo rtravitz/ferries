@@ -77,13 +77,28 @@ export function ActivePaneWrapper() {
     };
   };
 
-  const setTerminal = (terminal: Terminal, vessels: TerminalVessels) => {
+  const setTerminal = (terminal: Terminal, vessels: Array<Vessel>) => {
+    const relevantVessels = vessels.reduce(
+      (sorted: TerminalVessels, v: Vessel) => {
+        if (showOutOfService || v.isInService()) {
+          if (v.lastDock === terminal.name) {
+            sorted.outgoing.push(v);
+          }
+          if (v.nextDock === terminal.name) {
+            sorted.incoming.push(v);
+          }
+        }
+        return sorted;
+      },
+      { incoming: [], outgoing: [] },
+    );
+
     return () => {
       if (activePane && activePane.type === ActivePaneType.Terminal && activePane.terminalId === terminal.name) {
         setActivePane(null);
       } else {
         setActivePane({
-          component: <TerminalPane vessels={vessels} />,
+          component: <TerminalPane vessels={relevantVessels} />,
           header: terminal.name,
           headerColor: 'bg-sky-700',
           terminalId: terminal.name,

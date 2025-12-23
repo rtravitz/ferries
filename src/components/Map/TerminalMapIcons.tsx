@@ -12,7 +12,7 @@ interface TerminalMapIconsProps {
 }
 
 export function TerminalMapIcons({ terminals, vessels }: TerminalMapIconsProps) {
-  const { activePane, setTerminal, showOutOfService, showDocks } = useContext(ActivePaneContext);
+  const { activePane, setTerminal, showDocks } = useContext(ActivePaneContext);
   if (!showDocks) {
     return null;
   }
@@ -20,20 +20,6 @@ export function TerminalMapIcons({ terminals, vessels }: TerminalMapIconsProps) 
   return (
     <>
       {terminals.map((t) => {
-        const relevantVessels = vessels.reduce(
-          (sorted: TerminalVessels, v: Vessel) => {
-            if (showOutOfService || v.isInService()) {
-              if (v.lastDock === t.name) {
-                sorted.outgoing.push(v);
-              }
-              if (v.nextDock === t.name) {
-                sorted.incoming.push(v);
-              }
-            }
-            return sorted;
-          },
-          { incoming: [], outgoing: [] },
-        );
 
         const isSelected = activePane !== null && activePane.type === ActivePaneType.Terminal && activePane.terminalId === t.name;
 
@@ -43,7 +29,7 @@ export function TerminalMapIcons({ terminals, vessels }: TerminalMapIconsProps) 
             icon={makeTerminalIcon(isSelected)}
             key={t.name}
             position={[t.lat, t.lon]}
-            eventHandlers={{ mousedown: setTerminal(t, relevantVessels) }}
+            eventHandlers={{ mousedown: setTerminal(t, vessels) }}
           />
         );
       })}

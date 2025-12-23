@@ -79,6 +79,7 @@ export function Map({ setMap }: MapProps) {
           setUserLocation={setUserLocation}
           userLocation={userLocation}
           setSettings={setSettings}
+          vessels={vessels}
         />
       </MapContainer>
       <SlidingBottomPane activePane={activePane} setActivePane={setActivePane} />

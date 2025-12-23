@@ -5,6 +5,8 @@ import refresh from '../assets/refresh.svg';
 import info from '../assets/information-outline.svg';
 import cog from '../assets/cog.svg';
 import type { UserLocation } from './Map/UserLocationIcon';
+import { TerminalSearch } from './TerminalSearch';
+import Vessel from '../models/Vessel';
 
 interface FixedControlsProps {
   refreshVessels: () => void;
@@ -12,9 +14,10 @@ interface FixedControlsProps {
   setSettings: () => void;
   setUserLocation: React.Dispatch<React.SetStateAction<UserLocation | null>>;
   userLocation: UserLocation | null;
+  vessels: Array<Vessel>;
 }
 
-export default function FixedControls({ refreshVessels, setInfo, setSettings, setUserLocation, userLocation }: FixedControlsProps) {
+export default function FixedControls(props: FixedControlsProps) {
   const [spinning, setSpinning] = useState('');
 
   return (
@@ -22,7 +25,7 @@ export default function FixedControls({ refreshVessels, setInfo, setSettings, se
       <button
         title="Refresh vessel data"
         onClick={() => {
-          refreshVessels();
+          props.refreshVessels();
           setSpinning('animate-spin-once');
         }}
         onAnimationEnd={() => {
@@ -34,20 +37,21 @@ export default function FixedControls({ refreshVessels, setInfo, setSettings, se
       </button>
       <button
         title="Toggle info pane"
-        onClick={setInfo}
+        onClick={props.setInfo}
         className="bg-green-brand active:bg-green-900 rounded-full h-10 w-10 p-2 mt-4 shadow-lg select-none"
       >
         <img className="" src={info} alt="info icon" />
       </button>
       <button
         title="Toggle settings pane"
-        onClick={setSettings}
+        onClick={props.setSettings}
         className="bg-green-brand active:bg-green-900 rounded-full h-10 w-10 p-2 mt-4 shadow-lg select-none"
       >
         <img className="" src={cog} alt="cog icon" />
       </button>
-      <FindLocationButton userLocation={userLocation} setUserLocation={setUserLocation} />
-      {userLocation && <RecenterOnUserButton userLocation={userLocation} />}
+      <FindLocationButton userLocation={props.userLocation} setUserLocation={props.setUserLocation} />
+      {props.userLocation && <RecenterOnUserButton userLocation={props.userLocation} />}
+      <TerminalSearch vessels={props.vessels}/>
     </div>
   );
 }
