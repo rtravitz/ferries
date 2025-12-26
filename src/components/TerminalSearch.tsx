@@ -50,7 +50,7 @@ export function TerminalSearch(props: TerminalSearchProps) {
   }
 
   return (
-    <div ref={containerRef} className="fixed top-4 left-2 z-max">
+    <div ref={containerRef} className="fixed top-4 left-2 z-[803]">
       <div className="relative">
         <input
           ref={inputRef}
