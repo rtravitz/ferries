@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { ActivePaneContext } from '../ActivePaneContext';
 import { Marker } from 'react-leaflet';
 import { makeTerminalIcon } from '../../mapIcon';
-import type { Terminal, TerminalVessels } from '../../models/Terminal';
+import type { Terminal } from '../../models/Terminal';
 import type Vessel from '../../models/Vessel';
 import { ActivePaneType } from '../ActivePaneWrapper';
 
