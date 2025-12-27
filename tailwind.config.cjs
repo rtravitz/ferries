@@ -9,6 +9,12 @@ module.exports = {
         'ferry-red': "url('/src/assets/ferry-out-of-service.svg')",
       }),
       colors: {
+        red: {
+          'out-of-service': '#B91C1C',
+        },
+        orange: {
+          'delayed': '#B45309',
+        },
         gray: {
           'transparent-200': 'rgba(229, 231, 235, 0.9)',
           'transparent-300': 'rgba(209, 213, 219, 0.9)',

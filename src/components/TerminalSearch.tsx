@@ -41,7 +41,7 @@ export function TerminalSearch(props: TerminalSearchProps) {
   let buttonStyles: string;
   let anchorStyles: string = '';
   if (searching && searchVal) {
-    buttonStyles = 'scale-50 bg-red-500';
+    buttonStyles = 'scale-50 bg-red-out-of-service';
     anchorStyles = 'rotate-45'
   } else if (searching) {
     buttonStyles = 'scale-50 bg-blue-dock';

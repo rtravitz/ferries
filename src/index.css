@@ -12,7 +12,7 @@
   z-index: 9999;
 }
 
-.arrow-down {
+.arrow-down-good {
   width: 0;
   height: 0;
   border-left: 20px solid transparent;
@@ -21,13 +21,31 @@
   border-top: 20px solid rgb(4, 120, 87);
 }
 
-.arrow-right {
+.arrow-down-delayed {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+
+  border-top: 20px solid rgb(180, 83, 9);
+}
+
+.arrow-right-good {
   width: 0;
   height: 0;
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
 
   border-left: 15px solid rgb(4, 120, 87);
+}
+
+.arrow-right-delayed {
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+
+  border-left: 15px solid rgb(180, 83, 9);
 }
 
 .alert-enter {

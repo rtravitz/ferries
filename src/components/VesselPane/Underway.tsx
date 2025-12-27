@@ -5,11 +5,12 @@ interface UnderwayProps {
 }
 
 export default function Underway({ vessel }: UnderwayProps) {
+  const arrow = vessel.isDelayed() ? 'arrow-down-delayed' : 'arrow-down-good';
   return (
     <>
       <h3 className="text-xl font-light">{vessel.lastDock}</h3>
       <h5 className="font-semibold text-2xl">{vessel.leftDock}</h5>
-      <div className="arrow-down my-2"></div>
+      <div className={`${arrow} my-2`}></div>
       <h3 className="text-xl font-light">{vessel.nextDock}</h3>
       <h5 className="font-semibold text-2xl">{vessel.eta}</h5>
     </>

@@ -10,6 +10,16 @@ interface VesselViewProps {
   vessel: Vessel;
 }
 
+function getButtonColor(v: Vessel): string {
+  if (!v.isInService()) {
+    return 'bg-red-out-of-service'; 
+  } else if (v.isDelayed()) {
+    return 'bg-orange-delayed';
+  } else {
+    return 'bg-green-brand';
+  }
+}
+
 export default function VesselView({ vessel }: VesselViewProps) {
   let leftBlock;
   if (vessel.isInService()) {
@@ -41,7 +51,7 @@ export default function VesselView({ vessel }: VesselViewProps) {
             <h3 className="font-semibold text-2xl">{vessel.headingText}</h3>
           </div>
         </div>
-        <a href={wsdotPage} className="bg-green-brand py-2 px-4 mt-4 mb-2 shadow rounded-lg">
+        <a href={wsdotPage} className={`${getButtonColor(vessel)} py-2 px-4 mt-4 mb-2 shadow rounded-lg`}>
           <h3 className="text-gray-200 font-semibold">Boat Notes</h3>
         </a>
       </div>

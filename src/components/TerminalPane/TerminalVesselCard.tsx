@@ -89,6 +89,7 @@ export function TerminalVesselCard({ direction, vessel }: TerminalVesselCardProp
   };
 
   const headerColor = outOfService ? 'bg-red-700' : 'bg-slate-600';
+  const arrow = vessel.isDelayed() ? 'arrow-right-delayed' : 'arrow-right-good';
 
   return (
     <div onClick={onClick} className="bg-slate-100 rounded-lg shadow cursor-pointer">
@@ -98,7 +99,7 @@ export function TerminalVesselCard({ direction, vessel }: TerminalVesselCardProp
       </div>
       <div className="mb-4 px-2 py-2 flex items-center justify-center">
         <div className="flex flex-col justify-center items-center text-center">{departureSide}</div>
-        {hasBothSides && <div className="arrow-right mx-4" />}
+        {hasBothSides && <div className={`${arrow} mx-4`} />}
         <div className="flex flex-col justify-center items-center text-center">{arrivalSide}</div>
       </div>
     </div>
