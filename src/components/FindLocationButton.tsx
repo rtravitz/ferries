@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { usePrevious } from '../hooks';
 import type { UserLocation } from './Map/UserLocationIcon';
 import type { Map as LeafletMap } from 'leaflet';
+import { LAT_OFFSET } from '../constants';
 
 interface FindLocationButtonProps {
   userLocation: UserLocation | null;
@@ -18,7 +19,7 @@ export function FindLocationButton({ userLocation, setUserLocation, map }: FindL
   // There's a separate button that handles recentering for preexisting tracking sessions.
   useEffect(() => {
     if (!prevLocation && userLocation && map) {
-      map.flyTo([userLocation.latitude, userLocation.longitude], 15);
+      map.flyTo([userLocation.latitude - LAT_OFFSET, userLocation.longitude], 15);
     }
   }, [userLocation]);
 

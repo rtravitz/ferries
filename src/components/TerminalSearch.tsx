@@ -5,6 +5,7 @@ import { ActivePaneContext } from "./ActivePaneContext";
 import anchor from '../assets/anchor.svg';
 import { useOnClickOutside } from "../hooks";
 import type { Map as LeafletMap } from 'leaflet';
+import { LAT_OFFSET } from "../constants";
 
 interface TerminalSearchProps {
   vessels: Array<Vessel>;
@@ -90,7 +91,7 @@ export function TerminalSearch(props: TerminalSearchProps) {
               className="cursor-pointer hover:bg-slate-200 rounded-lg p-1"
               onClick={() => {
                 if (props.map) {
-                  props.map.setView([term.lat, term.lon], 15);
+                  props.map.setView([term.lat - LAT_OFFSET, term.lon], 15);
                 }
                 setTerminal(term, props.vessels)();
                 setSearching(false);

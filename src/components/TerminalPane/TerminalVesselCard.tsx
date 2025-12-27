@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { ActivePaneContext } from '../ActivePaneContext';
 import { TerminalVesselDirection } from './TerminalPane';
 import type Vessel from '../../models/Vessel';
+import { LAT_OFFSET } from '../../constants';
 
 interface TerminalVesselCardProps {
   direction: TerminalVesselDirection;
@@ -83,7 +84,7 @@ export function TerminalVesselCard({ direction, vessel }: TerminalVesselCardProp
     if (map) {
       const iconAlreadyVisible = map.getBounds().contains([vessel.lat, vessel.lon]);
       if (!iconAlreadyVisible) {
-        map.flyTo([vessel.lat, vessel.lon], 12);
+        map.flyTo([vessel.lat - LAT_OFFSET, vessel.lon], 12);
       }
     }
   };

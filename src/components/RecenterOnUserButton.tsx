@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { UserLocation } from './Map/UserLocationIcon';
 import type { Map as LeafletMap } from 'leaflet';
+import { LAT_OFFSET } from '../constants';
 
 interface RecenterOnUserButtonProps {
   userLocation: UserLocation;
@@ -22,7 +23,7 @@ export function RecenterOnUserButton({ userLocation, map }: RecenterOnUserButton
 
   const recenterOnUser = () => {
     if (map) {
-      map.flyTo([userLocation.latitude, userLocation.longitude], 15);
+      map.flyTo([userLocation.latitude - LAT_OFFSET, userLocation.longitude], 15);
       setCentered(true);
     }
   };
