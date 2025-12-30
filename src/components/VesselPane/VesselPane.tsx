@@ -51,7 +51,7 @@ export default function VesselView({ vessel }: VesselViewProps) {
             <h3 className="font-semibold text-2xl">{vessel.headingText}</h3>
           </div>
         </div>
-        <a href={wsdotPage} className={`${getButtonColor(vessel)} py-2 px-4 mt-4 mb-2 shadow rounded-lg`}>
+        <a href={wsdotPage} className={`${getButtonColor(vessel)} py-2 px-4 shadow rounded-lg`}>
           <h3 className="text-gray-200 font-semibold">Boat Notes</h3>
         </a>
       </div>
