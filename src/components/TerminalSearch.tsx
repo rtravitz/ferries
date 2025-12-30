@@ -6,6 +6,7 @@ import anchor from '../assets/anchor.svg';
 import { useOnClickOutside } from "../hooks";
 import type { Map as LeafletMap } from 'leaflet';
 import { LAT_OFFSET } from "../constants";
+import { Terminal } from "../models/Terminal";
 
 interface TerminalSearchProps {
   vessels: Array<Vessel>;
@@ -28,6 +29,9 @@ export function TerminalSearch(props: TerminalSearchProps) {
   const [searching, setSearching] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const terminalRefs = useRef<Array<HTMLLIElement | null>>([]);
+
   const { setTerminal } = useContext(ActivePaneContext);
 
   useOnClickOutside(containerRef, () => { setSearching(false); });
@@ -35,8 +39,12 @@ export function TerminalSearch(props: TerminalSearchProps) {
   useEffect(() => {
     const filtered = sortedTerminals.filter(term =>
       term.name.toLowerCase().includes(searchVal.trim().toLowerCase()));
+
+    if (activeIndex >= filtered.length) {
+      setActiveIndex(filtered.length - 1);
+    }
     setFilteredTerminals(filtered);
-  }, [searchVal]);
+  }, [searchVal, activeIndex, sortedTerminals]);
 
   const inputStyles = searching ? 'w-56' : 'w-2';
   let buttonStyles: string;
@@ -46,8 +54,15 @@ export function TerminalSearch(props: TerminalSearchProps) {
     anchorStyles = 'rotate-45'
   } else if (searching) {
     buttonStyles = 'scale-50 bg-blue-dock';
-  } else {
-    buttonStyles = 'scale-100 bg-green-brand';
+  } else { buttonStyles = 'scale-100 bg-green-brand'; }
+
+  const selectListItem = (term: Terminal) => {
+    if (props.map) {
+      props.map.setView([term.lat - LAT_OFFSET, term.lon], 15);
+    }
+    setTerminal(term, props.vessels)();
+    setSearching(false);
+    setSearchVal('');
   }
 
   return (
@@ -61,6 +76,40 @@ export function TerminalSearch(props: TerminalSearchProps) {
           placeholder="Search for a terminal..."
           value={searchVal}
           onChange={(e) => { setSearchVal(e.target.value); }}
+          onKeyDown={(e) => {
+            if (!searching) {
+              return;
+            }
+
+            if (e.key === 'ArrowDown') {
+              e.preventDefault()
+              if (filteredTerminals.length > activeIndex + 1) {
+                const updatedIdx = activeIndex + 1;
+                setActiveIndex(updatedIdx);
+                terminalRefs.current[updatedIdx]?.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'center' });
+              }
+            } else if (e.key === 'ArrowUp') {
+              e.preventDefault();
+              if (activeIndex - 1 >= 0 && filteredTerminals.length > 0) {
+                const updatedIdx = activeIndex - 1;
+                setActiveIndex(updatedIdx);
+                terminalRefs.current[updatedIdx]?.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'center' });
+              }
+            } else if (e.key === 'Enter') {
+              e.preventDefault();
+              selectListItem(filteredTerminals[activeIndex]);
+              setActiveIndex(-1);
+            } else if (e.key === 'Escape') {
+              setActiveIndex(-1);
+              setSearching(false);
+            } else if (e.key === 'Home' && filteredTerminals.length > 0) {
+              e.preventDefault();
+              setActiveIndex(0);
+            } else if (e.key === 'End' && filteredTerminals.length > 0) {
+              e.preventDefault();
+              setActiveIndex(filteredTerminals.length - 1);
+            }
+          }}
         />
         <button
           className={`transition-[transform] duration-300 absolute top-0 left-0 w-16 h-16 p-2 shadow-lg rounded-full ${buttonStyles}`}
@@ -78,7 +127,6 @@ export function TerminalSearch(props: TerminalSearchProps) {
                 inputRef.current.focus();
               }
             }
-
           }}>
           <img src={anchor} className={`transition-[transform] duration-300 ${anchorStyles}`} />
         </button>
@@ -86,18 +134,17 @@ export function TerminalSearch(props: TerminalSearchProps) {
       {
         filteredTerminals.length > 0 && searching &&
         <ul className="text-lg w-56 text-center fixed top-[4.75rem] left-5 bg-slate-100 rounded-lg shadow p-2 z-max max-h-[50vh] overflow-y-auto">
-          {filteredTerminals.map(term =>
-            <li
-              className="cursor-pointer hover:bg-slate-200 rounded-lg p-1"
-              onClick={() => {
-                if (props.map) {
-                  props.map.setView([term.lat - LAT_OFFSET, term.lon], 15);
-                }
-                setTerminal(term, props.vessels)();
-                setSearching(false);
-                setSearchVal('');
-              }}
-              value={term.name}>{term.name}</li>)}
+          {
+            filteredTerminals.map((term, idx) => {
+              return <li
+                className={`cursor-pointer rounded-lg p-1 ${activeIndex === idx ? 'bg-slate-200' : ''}`}
+                aria-selected={activeIndex === idx}
+                tabIndex={activeIndex === idx ? 0 : -1}
+                onClick={() => { selectListItem(term) }}
+                ref={(el) => { terminalRefs.current[idx] = el }}
+                value={term.name}>{term.name}</li>
+            })
+          }
         </ul>
       }
     </div>
