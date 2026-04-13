@@ -110,3 +110,7 @@ a {
   border-radius: 1rem;
   border: solid 2px rgb(4, 120, 87);
 }
+
+.no-webkit-tap {
+  -webkit-tap-highlight-color: transparent;
+}

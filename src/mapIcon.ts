@@ -41,16 +41,18 @@ export function makeVesselIcon(vessel: Vessel, selected: boolean) {
   const width = selected ? 50 : 40;
   const height = selected ? 50 : 40;
 
-  const classes = selected
-    ? 'bg-blue-secondary border-solid border border-gray-200 rounded-full shadow-md transition-height duration-500 custom-arrow-rotation'
-    : 'bg-transparent border-none shadow-none transition-height duration-500 custom-arrow-rotation';
+  const sharedClasses = 'transition-height duration-500 custom-arrow-rotation no-webkit-tap'
+  const selectedClasses = selected
+    ? 'bg-blue-secondary border-solid border border-gray-200 rounded-full shadow-md'
+    : 'bg-transparent border-none shadow-none';
+
 
   return {
     alt: vessel.name,
     icon: new DivIcon({
       html: generateVesselSvg(vessel),
       iconSize: new L.Point(width, height),
-      className: classes,
+      className: `${sharedClasses} ${selectedClasses}`,
     }),
   };
 }
